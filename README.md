@@ -1,2 +1,5 @@
 # reading-todo
-Angular-Flask app to manage a reading todo list
+
+An app to manage a reading todo list
+
+I am starting this maily for educational purposes.
