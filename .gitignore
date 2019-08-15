@@ -1,0 +1,8 @@
+.jekyll-metadata
+_site
+.sass-cache
+.cache
+__pycache__
+*.py[cod]
+*.temp
+*.log
