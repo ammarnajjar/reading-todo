@@ -6,7 +6,7 @@
 # Site settings
 title: Reading-Todo Documentation
 description: >
-baseurl: ''
+baseurl: '/reading-todo'
 twitter_username: ammarnajjar
 github_username: ammarnajjar
 linkedin_username: najjarammar
