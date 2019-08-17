@@ -1,25 +1,28 @@
 ---
 layout: post
 title: 'Minimum Viable Product 1'
-date: Fri Aug 16 22:24:08 CEST 2019
+date: Sat Aug 17 14:38:34 CEST 2019
 ---
 
 # Project Description
 
 - What is this application for?
+
   This application is meant to be a mobile-first web application, with the basic functionality
   to show a list of books, helps showing what is read, and what is still on the todo-list.
 
 - Who can use it?
-  Anyone who has access to the internet, has passion to reading books, and want to monitor his/her reading process, keep a list of what is read and what is to be read.
+
+  Anyone who has access to the internet, uses a modern web browser, has passion to reading books, and want to monitor his/her reading process, keep a list of what is read and what is to be read.
 
 - What to expect or see when it launches?
-  A list of books, next to each book, an indication if it is read or not. Order does not matter.
+
+  A list of books, and next to each book there is an indication if it is read or not. Order of the books does not matter.
 
 - How to interact with it?
 
-  - see an empty table-like list with headers for book-title and reading-status.
-  - a button to be able to add a book.
-    - a form is shown to enter book detail and add it to the list.
-  - a button to be able to remove a book.
-
+  - See an empty table-like list with headers for book-title and reading-status.
+  - A button to be able to add a book.
+    - When clicked, a form is shown to enter book detail and add it to the list.
+  - A button to be able to remove a book.
+  - After refreshing or reloading the app, all data will be reset to an initial defined state.
