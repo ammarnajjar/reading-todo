@@ -25,7 +25,7 @@ All development related decisions must be documented in ADRs.
 
 - Write for every time a new decision is made a new markdown file :-D
 
-## References (optional)
+## References:
 
 - [wikipedia](https://en.wikipedia.org/wiki/Architectural_decision<Paste>)
 - [ADR](https://github.com/joelparkerhenderson/architecture_decision_record)
