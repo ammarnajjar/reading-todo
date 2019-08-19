@@ -1,9 +1,6 @@
 name: Client-CI
 
-on:
-  push:
-    paths:
-      - client/*
+on: [push]
 
 jobs:
   build:
