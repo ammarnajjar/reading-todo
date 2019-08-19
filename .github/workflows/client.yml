@@ -12,7 +12,7 @@ jobs:
         run: |
           cd client
           npm ci
-          npm run test
+          npm run test --ci
       - name: Build Client
         run: |
           cd client
