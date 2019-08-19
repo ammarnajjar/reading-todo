@@ -8,15 +8,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - name: Go to Client
-        run: |
-          cd client
-      - name: Install deps
-        run: |
-          npm install
       - name: Run tests
         run: |
+          cd client
+          npm ci
           npm run test
       - name: Build Client
         run: |
+          cd client
+          npm ci
           npm build
