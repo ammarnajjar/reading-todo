@@ -1,0 +1,56 @@
+---
+# tasks file for client
+
+- name: Tear down existing services
+  docker_compose:
+    project_src: ../client
+    state: absent
+
+- name: Create and start services
+  docker_compose:
+    project_src: ../client
+  register: output
+
+- debug:
+    var: output
+
+- name: Run `docker-compose up` again
+  docker_compose:
+    project_src: ../client
+    build: no
+  register: output
+
+- debug:
+    var: output
+
+- assert:
+    that:
+      - 'not output.changed'
+
+- name: Stop all services
+  docker_compose:
+    project_src: ../client
+    build: no
+    stopped: yes
+  register: output
+
+- debug:
+    var: output
+
+- assert:
+    that:
+      - 'not client.reading_todo_client.state.running'
+
+- name: Restart services
+  docker_compose:
+    project_src: ../client
+    build: no
+    restarted: yes
+  register: output
+
+- debug:
+    var: output
+
+- assert:
+    that:
+      - 'client.reading_todo_client.state.running'

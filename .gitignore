@@ -5,7 +5,7 @@ _site
 __pycache__
 *.py[cod]
 *.temp
-
+venv
 
 # dependencies
 node_modules

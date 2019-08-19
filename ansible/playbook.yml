@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  connection: local
+
+  roles:
+    - role: python-deps
+    - role: client
+# ansible-playbook playbook.yml -i hosts.yml --check

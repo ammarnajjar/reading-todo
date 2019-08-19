@@ -2,8 +2,8 @@ version: '3.6'
 
 services:
   client:
-    image: reading-todo/client:dev
-    container_name: reading-todo-client
+    image: reading_todo/client:dev
+    container_name: reading_todo_client
     build: client/
     ports:
       - 3200:80
