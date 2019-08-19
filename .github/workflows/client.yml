@@ -2,15 +2,18 @@ name: Client-CI
 
 on: [push]
 
+push:
+  paths:
+    - client/*
+
 jobs:
   build:
     runs-on: ubuntu-latest, macos-latest
 
     steps:
       - uses: actions/checkout@master
-      - paths:
-          - client/*
       - name: Build Client
         run: |
+          cd client
           npm run test
           npm build
