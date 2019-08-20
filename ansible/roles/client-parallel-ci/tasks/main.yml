@@ -1,0 +1,100 @@
+---
+# tasks file for ansible/roles/client-parallel-ci
+
+- name: Build dev image
+  docker_image:
+    name: '{{ image_name }}'
+    tag: '{{ image_tag }}'
+    build:
+      path: '{{ client_dir }}'
+      dockerfile: 'Dockerfile.dev'
+      pull: no
+      rm: yes
+    source: build
+    state: present
+
+- name: Start ci containers
+  docker_container:
+    name: '{{ container_name }}'
+    image: '{{ image_name }}:{{ image_tag }}'
+    interactive: yes
+    state: started
+  loop: '{{ all_containers }}'
+  loop_control:
+    loop_var: 'container_name'
+
+- name: Lint
+  docker_container:
+    detach: false
+    name: '{{ lint_container_name }}'
+    command: '{{ lint_cmd }}'
+  async: 1000
+  poll: 0
+  register: async_lint
+
+- name: UnitTests
+  docker_container:
+    detach: false
+    name: '{{ test_container_name }}'
+    command: '{{ test_cmd }}'
+  async: 1000
+  poll: 0
+  register: async_test
+
+- name: Build
+  docker_container:
+    detach: false
+    name: '{{ build_container_name }}'
+    command: '{{ build_cmd }}'
+  async: 1000
+  poll: 0
+  register: async_build
+
+- name: wait for linting to finish
+  async_status:
+    jid: '{{ async_lint.ansible_job_id }}'
+  register: lint_result
+  until: lint_result.finished
+  retries: 100
+
+- name: wait for tests to finish
+  async_status:
+    jid: '{{ async_test.ansible_job_id }}'
+  register: test_result
+  until: test_result.finished
+  retries: 100
+
+- name: wait for build to finish
+  async_status:
+    jid: '{{ async_build.ansible_job_id }}'
+  register: build_result
+  until: build_result.finished
+  retries: 100
+
+- name: Show lint output
+  debug:
+    var: lint_result.ansible_facts.docker_container.Output
+
+- name: Show test output
+  debug:
+    var: test_result.ansible_facts.docker_container.Output
+
+- name: Show build output
+  debug:
+    var: build_result.ansible_facts.docker_container.Output
+
+- name: Stop ci containers
+  docker_container:
+    name: '{{ container_name }}'
+    state: stopped
+  loop: '{{ all_containers }}'
+  loop_control:
+    loop_var: 'container_name'
+
+- name: Delete ci containers
+  docker_container:
+    name: '{{ container_name }}'
+    state: absent
+  loop: '{{ all_containers }}'
+  loop_control:
+    loop_var: 'container_name'

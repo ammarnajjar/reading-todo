@@ -1,0 +1,17 @@
+---
+# vars file for ansible/roles/client-parallel-ci
+
+client_dir: '../client/'
+image_name: 'reading-todo/client'
+image_tag: 'dev'
+
+base_container_name: 'reading_todo_client_ci'
+lint_container_name: '{{ base_container_name }}_lint'
+test_container_name: '{{ base_container_name }}_test'
+build_container_name: '{{ base_container_name }}_build'
+all_containers:
+  ['{{ lint_container_name }}', '{{ test_container_name }}', '{{ build_container_name }}']
+
+lint_cmd: 'npm run lint'
+test_cmd: 'npm run test:coverage'
+build_cmd: 'npm run build'
