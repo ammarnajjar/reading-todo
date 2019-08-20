@@ -2,13 +2,9 @@
 
 The roles are:
 
-- python-deps:
-
-To install the ansible docker-compose dependencies.
-
-- client:
-
-To run the client service in the context of docker-compose.
+- python-deps: install the ansible docker-compose dependencies.
+- client: run the client service in the context of docker-compose.
+- client-ci: run the client ci pipeline dockerized locally.
 
 ### Run the Playbook
 
