@@ -21,5 +21,11 @@ python3 -m venv venv && source venv/bin/activate
 - Play the playbook
 
 ```bash
-ansible-playbook playbook.yml -i hosts.yml --check
+ansible-playbook playbook.yml -i hosts.yml
+```
+
+- Play single role, CI pipeline for example
+
+```bash
+ansible-playbook playbook.yml -i hosts.yml --tags "ci"
 ```
