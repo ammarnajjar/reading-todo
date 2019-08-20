@@ -8,6 +8,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
+      - name: Lint React
+        run: |
+          cd client
+          npm ci
+          npm run lint
       - name: Run tests
         run: |
           cd client
