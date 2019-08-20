@@ -4,3 +4,4 @@ pip_pkgs:
   - docker
   - PyYAML
   - docker-compose
+  - ansible-lint

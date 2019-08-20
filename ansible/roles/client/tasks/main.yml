@@ -23,7 +23,8 @@
 - debug:
     var: output
 
-- assert:
+- name: assert output did not change
+  assert:
     that:
       - 'not output.changed'
 
@@ -37,7 +38,8 @@
 - debug:
     var: output
 
-- assert:
+- name: client container not running
+  assert:
     that:
       - 'not client.reading_todo_client.state.running'
 
@@ -51,6 +53,7 @@
 - debug:
     var: output
 
-- assert:
+- name: client container is running
+  assert:
     that:
       - 'client.reading_todo_client.state.running'
