@@ -11,15 +11,18 @@ jobs:
       - name: Lint React
         run: |
           cd client
+          ls -l
           npm ci
           npm run lint
       - name: Run tests
         run: |
           cd client
+          ls -l
           npm ci
           npm run test:coverage
       - name: Build Client
         run: |
           cd client
+          ls -l
           npm ci
           npm build
