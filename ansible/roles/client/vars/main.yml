@@ -1,2 +1,5 @@
 ---
 # vars file for client
+
+project_src: '../client'
+container_name: 'reading_todo_client'
