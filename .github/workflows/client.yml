@@ -8,21 +8,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
+      - name: Update npm
+        run: |
+          cd client
+          npm ci
+          ls -la
       - name: Lint React
         run: |
           cd client
-          ls -l
-          npm ci
           npm run lint
       - name: Run tests
         run: |
           cd client
-          ls -l
-          npm ci
           npm run test:coverage
       - name: Build Client
         run: |
           cd client
-          ls -l
-          npm ci
           npm build
