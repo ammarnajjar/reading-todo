@@ -2,8 +2,8 @@ version: '3.6'
 
 services:
   client:
-    image: reading_todo/client:dev
-    container_name: reading_todo_client
+    image: $IMAGE_NAME
+    container_name: $CONTAINER_NAME
     build: client/
     ports:
-      - 3200:80
+      - $LIVE_PORT:$NGINX_PORT
