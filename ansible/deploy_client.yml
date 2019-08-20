@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  connection: local
+  strategy: free
+
+  roles:
+    - { role: 'client', tags: ['client', 'deploy'] }

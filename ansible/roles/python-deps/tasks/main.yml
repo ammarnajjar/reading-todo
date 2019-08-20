@@ -1,0 +1,6 @@
+---
+# tasks file for python-deps
+
+- name: Install ansible python dependencies
+  pip:
+    name: '{{ pip_pkgs }}'

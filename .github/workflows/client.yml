@@ -1,0 +1,27 @@
+name: Client-CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Update npm
+        run: |
+          cd client
+          npm ci
+          ls -la
+      - name: Lint React
+        run: |
+          cd client
+          npm run lint
+      - name: Run tests
+        run: |
+          cd client
+          npm run test:coverage
+      - name: Build Client
+        run: |
+          cd client
+          npm run build

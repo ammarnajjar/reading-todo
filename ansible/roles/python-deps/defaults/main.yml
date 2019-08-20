@@ -1,0 +1,7 @@
+---
+# defaults file for python-deps
+pip_pkgs:
+  - docker
+  - PyYAML
+  - docker-compose
+  - ansible-lint

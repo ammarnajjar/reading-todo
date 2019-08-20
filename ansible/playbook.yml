@@ -1,0 +1,4 @@
+---
+- import_playbook: install_deps.yml
+- import_playbook: client_ci.yml
+- import_playbook: deploy_client.yml
