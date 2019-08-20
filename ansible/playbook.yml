@@ -3,6 +3,7 @@
   connection: local
 
   roles:
-    - role: python-deps
-    - role: client
+    - { role: 'python-deps', tags: 'ansible' }
+    - { role: 'client-ci', tags: 'ci' }
+    - { role: 'client', tags: 'client' }
 # ansible-playbook playbook.yml -i hosts.yml --check
