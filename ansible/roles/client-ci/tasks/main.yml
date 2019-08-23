@@ -13,52 +13,61 @@
     source: build
     state: present
 
-- name: Start the container
+- name: Start container
   docker_container:
     name: '{{ container_name }}'
     image: '{{ image_name }}:dev'
     interactive: yes
     state: started
 
-- name: Lint
-  docker_container:
-    detach: false
-    name: '{{ container_name }}'
-    command: '{{ lint_cmd }}'
-  register: lint_output
+- name: Start ci
+  block:
+    - name: Lint
+      docker_container:
+        detach: false
+        name: '{{ container_name }}'
+        command: '{{ lint_cmd }}'
+      register: lint_output
 
-- name: Show lint output
-  debug:
-    var: lint_output.ansible_facts.docker_container.Output
+    - name: Show lint output
+      debug:
+        var: lint_output.ansible_facts.docker_container.Output
 
-- name: UnitTests
-  docker_container:
-    detach: false
-    name: '{{ container_name }}'
-    command: '{{ test_cmd }}'
-  register: test_output
+    - name: UnitTests
+      docker_container:
+        detach: false
+        name: '{{ container_name }}'
+        command: '{{ test_cmd }}'
+      register: test_output
 
-- name: Show test output
-  debug:
-    var: test_output.ansible_facts.docker_container.Output
+    - name: Show test output
+      debug:
+        var: test_output.ansible_facts.docker_container.Output
 
-- name: Build
-  docker_container:
-    detach: false
-    name: '{{ container_name }}'
-    command: '{{ build_cmd }}'
-  register: build_output
+    - name: Build
+      docker_container:
+        detach: false
+        name: '{{ container_name }}'
+        command: '{{ build_cmd }}'
+      register: build_output
 
-- name: Show build output
-  debug:
-    var: build_output.ansible_facts.docker_container.Output
+    - name: Show build output
+      debug:
+        var: build_output.ansible_facts.docker_container.Output
 
-- name: Stop the container
-  docker_container:
-    name: '{{ container_name }}'
-    state: stopped
+  always:
+    - name: Stop container
+      docker_container:
+        name: '{{ container_name }}'
+        state: stopped
 
-- name: Delete the container
-  docker_container:
-    name: '{{ container_name }}'
-    state: absent
+    - name: Delete container
+      docker_container:
+        name: '{{ container_name }}'
+        state: absent
+
+    - name: Remove image
+      docker_image:
+        state: absent
+        name: '{{ image_name }}'
+        tag: dev
