@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-time ansible/play ansible/playbook.yml -i ansible/hosts.yml --tags "ci"
+PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+time \
+	$PROJECT_ROOT/ansible/play \
+	$PROJECT_ROOT/ansible/playbook.yml \
+	-i $PROJECT_ROOT/ansible/hosts.yml \
+	--tags "ci"

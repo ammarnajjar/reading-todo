@@ -1,7 +1,8 @@
 #!/bin/bash
 
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VENV="$PROJECT_ROOT/venv"
+# PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+VENV="$PROJECT_ROOT/ansible/venv"
 echo $VENV
 
 if [ ! -e "$VENV" ]; then
