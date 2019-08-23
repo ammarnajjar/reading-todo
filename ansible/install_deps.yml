@@ -4,4 +4,4 @@
   strategy: free
 
   roles:
-    - { role: 'python-deps', tags: ['client', 'deps'] }
+    - { role: 'python-deps', tags: ['deps', 'client', 'ci', 'deploy'] }
