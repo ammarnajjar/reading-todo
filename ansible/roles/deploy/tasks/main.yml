@@ -1,0 +1,22 @@
+---
+# tasks file for deploy
+
+- name: Tear down existing services
+  docker_compose:
+    project_src: '{{ project_src }}'
+    state: absent
+
+- name: Create and start services
+  docker_compose:
+    project_src: '{{ project_src }}'
+    build: yes
+  register: output
+
+- debug:
+    var: output
+
+- name: Services containers are running
+  assert:
+    that:
+      - 'client.{{ client_container_name }}.state.running'
+      - 'docs.{{ docs_container_name }}.state.running'

@@ -4,4 +4,4 @@
   strategy: free
 
   roles:
-    - { role: 'client', tags: ['client', 'deploy'] }
+    - { role: 'deploy', tags: ['deploy'] }
