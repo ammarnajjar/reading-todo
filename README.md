@@ -27,15 +27,15 @@ I am starting this maily for educational purposes.
   Source the `.envrc` file which adds some scripts to the `PATH`
 
   ```bash
-  ci		# => run ci pipeline
+  ci        # => run ci pipeline
 
-  deploy	# => deploy locally
+  deploy    # => deploy locally
 
-  cicd	# => run ci pipeline then deploy locally
+  cicd      # => run ci pipeline then deploy locally
   ```
 
 ### Browse the deployment
 
-- Docs: [localhost:3100/](http://localhost:3100/)
-- Dev: [localhost:3200/](http://localhost:3200/)
-- Prod: [localhost:3300/](http://localhost:3300/)
+- Docs: [localhost:3100](http://localhost:3100/)
+- Dev: [localhost:3200](http://localhost:3200/)
+- Prod: [localhost:3300](http://localhost:3300/)
