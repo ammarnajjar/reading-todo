@@ -1,9 +1,16 @@
-version: '3.6'
+version: '3.7'
 
 services:
   client:
-    image: $IMAGE_NAME
-    container_name: $CONTAINER_NAME
+    image: $CLIENT_IMAGE_NAME
+    container_name: $CLIENT_CONTAINER_NAME
     build: client/
     ports:
-      - $LIVE_PORT:$NGINX_PORT
+      - $CLIENT_LIVE_PORT:$NGINX_PORT
+
+  docs:
+    image: $DOCS_IMAGE_NAME
+    container_name: $DOCS_CONTAINER_NAME
+    build: docs/
+    ports:
+      - $DOCS_LIVE_PORT:$NGINX_PORT
