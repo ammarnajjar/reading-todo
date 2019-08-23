@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VENV="$PROJECT_ROOT/ansible/venv"
+VENV="$PROJECT_ROOT/venv"
 echo $VENV
 
 if [ ! -e "$VENV" ]; then

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+time ansible/play ansible/playbook.yml -i ansible/hosts.yml --tags "deploy"
