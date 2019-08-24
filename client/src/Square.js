@@ -19,6 +19,6 @@ export class Square extends React.Component {
 }
 
 Square.propTypes = {
-  value: PropTypes.number,
+  value: PropTypes.string,
   onClick: PropTypes.func,
 };
