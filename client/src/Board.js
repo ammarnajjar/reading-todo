@@ -60,7 +60,7 @@ export class Board extends React.Component {
   }
 }
 
-function calculateWinner(squares) {
+export function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
     [0, 3, 6],

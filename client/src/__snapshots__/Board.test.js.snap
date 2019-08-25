@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Board renderSquare renders a square 1`] = `
+<Square
+  onClick={[Function]}
+  value="X"
+/>
+`;
