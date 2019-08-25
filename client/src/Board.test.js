@@ -2,7 +2,6 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { Board, calculateWinner } from './Board';
-import { Square } from './Square';
 
 describe('Board', () => {
   let container = null;
