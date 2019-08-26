@@ -13,7 +13,7 @@ export class Game extends React.Component {
     };
   }
 
-  jumptTo(step) {
+  jumpTo(step) {
     this.setState({
       stepNumber: step,
       xIsNext: step % 2 === 0,
@@ -43,8 +43,8 @@ export class Game extends React.Component {
     const moves = history.map((step, move) => {
       const desc = move ? 'Go to move #' + move : 'Go to game start';
       return (
-        <li key={move}>
-          <button onClick={() => this.jumptTo(move)}>{desc}</button>
+        <li data-testid={`move-${move}`} key={move}>
+          <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });
@@ -62,7 +62,7 @@ export class Game extends React.Component {
           <Board squares={current.squares} onClick={i => this.handleClick(i)} />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <div className="status">{status}</div>
           <ol>{moves}</ol>
         </div>
       </div>

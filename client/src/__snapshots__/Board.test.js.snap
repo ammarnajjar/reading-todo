@@ -3,6 +3,6 @@
 exports[`Board renderSquare renders a square 1`] = `
 <Square
   onClick={[Function]}
-  value="X"
+  value="T"
 />
 `;
