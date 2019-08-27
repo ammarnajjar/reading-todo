@@ -1,4 +1,4 @@
-import { calculateWinner } from './calculate-winner';
+import { calculateWinner } from './CalculateWinner';
 
 describe('calculateWinner', () => {
   const mockSquares = Array(9).fill(null);

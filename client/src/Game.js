@@ -1,6 +1,6 @@
 import React from 'react';
 import { Board } from './Board';
-import { calculateWinner } from './calculate-winner';
+import { calculateWinner } from './CalculateWinner';
 import './Game.css';
 
 export class Game extends React.Component {
