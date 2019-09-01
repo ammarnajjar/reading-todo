@@ -1,11 +1,9 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
-import { Board } from './Board';
+import { App } from './App';
 
 describe('Board', () => {
   let container = null;
-  let board = null;
 
   beforeEach(() => {
     // setup a DOM element as a render target
@@ -21,18 +19,7 @@ describe('Board', () => {
   });
 
   it('renders without crashing', () => {
-    act(() => {
-      render(<Board squares={Array(9).fill(null)} />, container);
-    });
+    render(<App />, container);
     unmountComponentAtNode(container);
-  });
-
-  describe('renderSquare', () => {
-    it('renders a square', () => {
-      act(() => {
-        board = render(<Board squares={Array(9).fill('T')} />, container);
-      });
-      expect(board.renderSquare(0)).toMatchSnapshot();
-    });
   });
 });
