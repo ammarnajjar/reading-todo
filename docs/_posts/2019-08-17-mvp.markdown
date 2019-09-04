@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Minimum Viable Product'
+title: 'Minimum Viable Product (0.1.0)'
 date: Sat Aug 17 14:38:34 CEST 2019
 ---
 

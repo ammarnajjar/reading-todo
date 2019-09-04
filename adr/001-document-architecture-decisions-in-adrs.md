@@ -4,7 +4,7 @@ Date: Thu Aug 15 22:48:16 CEST 2019
 
 ## Milestone
 
-MVP1
+0.1.0
 
 ## Context
 
@@ -29,4 +29,3 @@ All development related decisions must be documented in ADRs.
 
 - [wikipedia](https://en.wikipedia.org/wiki/Architectural_decision<Paste>)
 - [ADR](https://github.com/joelparkerhenderson/architecture_decision_record)
-

@@ -4,7 +4,7 @@ Date: Sun Aug 18 20:59:08 CEST 2019
 
 ## Milestone
 
-MVP1
+0.1.0
 
 ## Context
 
