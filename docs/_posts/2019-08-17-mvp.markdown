@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Minimum Viable Product 1'
+title: 'Minimum Viable Product'
 date: Sat Aug 17 14:38:34 CEST 2019
 ---
 
@@ -25,4 +25,4 @@ date: Sat Aug 17 14:38:34 CEST 2019
   - A button to be able to add a book.
     - When clicked, a form is shown to enter book detail and add it to the list.
   - A button to be able to remove a book.
-  - After refreshing or reloading the app, all data will be reset to an initial defined state.
+  - After refreshing or reloading the app, all data will be presistent.
