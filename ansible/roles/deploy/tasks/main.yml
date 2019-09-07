@@ -20,3 +20,5 @@
     that:
       - 'client.{{ client_container_name }}.state.running'
       - 'docs.{{ docs_container_name }}.state.running'
+      - 'db.{{ postgres_container_name }}.state.running'
+      - 'adminer.{{ adminer_container_name }}.state.running'
