@@ -1,6 +1,5 @@
 client: reading-todo/client
 docs: reading-todo/docs
-postgress: 11.5
 
 memoryrequest: '200Mi'
 cpurequest: '0.1'
