@@ -1,3 +1,6 @@
+local('kubectl config use-context docker-desktop')
+# local('helm init --canary-image --kube-context docker-desktop')
+
 allow_k8s_contexts('docker-desktop')
 
 docker_build('reading-todo/client', '../client')
