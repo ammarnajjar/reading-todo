@@ -1,0 +1,7 @@
+client: reading-todo/client
+docs: reading-todo/docs
+
+memoryrequest: '200Mi'
+cpurequest: '0.1'
+memorylimit: '1Gi'
+cpulimit: '1.5'

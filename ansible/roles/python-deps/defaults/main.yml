@@ -5,3 +5,6 @@ pip_pkgs:
   - PyYAML
   - docker-compose
   - ansible-lint
+  - openshift
+  - pyhelm
+  - grpcio
