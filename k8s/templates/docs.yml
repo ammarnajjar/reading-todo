@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: docs
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: docs
+      labels:
+        app: docs
+    spec:
+      containers:
+        - name: docs
+          image: '{{ .Values.docs }}'
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: '{{ .Values.memoryrequest }}'
+              cpu: '{{ .Values.cpurequest }}'
+            limits:
+              memory: '{{ .Values.memorylimit }}'
+              cpu: '{{ .Values.cpulimit }}'
+          env:
+            - name: no_proxy
+              value: 'localhost,127.0.0.1'
+          ports:
+            - containerPort: 80
+              protocol: TCP
