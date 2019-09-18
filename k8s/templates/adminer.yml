@@ -1,18 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: '{{ .Values.docs.name }}'
+  name: '{{ .Values.adminer.name }}'
 spec:
   replicas: 1
   template:
     metadata:
-      name: '{{ .Values.docs.name }}'
+      name: '{{ .Values.adminer.name }}'
       labels:
-        app: '{{ .Values.docs.name }}'
+        name: '{{ .Values.adminer.name }}'
     spec:
+      hostname: '{{ .Values.adminer.name }}'
+      subdomain: '{{ .Values.adminer.name }}'
       containers:
-        - name: '{{ .Values.docs.name }}'
-          image: '{{ .Values.docs.image }}'
+        - name: '{{ .Values.adminer.name }}'
+          image: '{{ .Values.adminer.image }}'
           imagePullPolicy: Always
           resources:
             requests:
@@ -22,7 +24,7 @@ spec:
               memory: '{{ .Values.memorylimit }}'
               cpu: '{{ .Values.cpulimit }}'
           ports:
-            - containerPort: 3100
+            - containerPort: 8080
               protocol: TCP
       nodeSelector:
         kubernetes.io/hostname: docker-desktop

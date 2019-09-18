@@ -1,18 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: '{{ .Values.docs.name }}'
+  name: '{{ .Values.postgres.name }}'
 spec:
   replicas: 1
   template:
     metadata:
-      name: '{{ .Values.docs.name }}'
+      name: '{{ .Values.postgres.name }}'
       labels:
-        app: '{{ .Values.docs.name }}'
+        name: '{{ .Values.postgres.name }}'
     spec:
+      hostname: '{{ .Values.postgres.name }}'
+      subdomain: '{{ .Values.postgres.name }}'
       containers:
-        - name: '{{ .Values.docs.name }}'
-          image: '{{ .Values.docs.image }}'
+        - name: '{{ .Values.postgres.name }}'
+          image: '{{ .Values.postgres.image }}'
           imagePullPolicy: Always
           resources:
             requests:
@@ -22,7 +24,7 @@ spec:
               memory: '{{ .Values.memorylimit }}'
               cpu: '{{ .Values.cpulimit }}'
           ports:
-            - containerPort: 3100
+            - containerPort: 5432
               protocol: TCP
       nodeSelector:
         kubernetes.io/hostname: docker-desktop
