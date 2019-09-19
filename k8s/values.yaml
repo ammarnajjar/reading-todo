@@ -23,6 +23,4 @@ postgres:
 adminer:
   name: adminer
   image: adminer
-  subdomain: adminer-subdomain
-  svcname: adminer-svc
   portType: NodePort
