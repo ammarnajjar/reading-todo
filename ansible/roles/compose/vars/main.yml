@@ -1,5 +1,5 @@
 ---
-# vars file for deploy
+# vars file for compose
 
 project_src: '..'
 client_container_name: 'reading_todo_client'

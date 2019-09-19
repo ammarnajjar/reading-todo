@@ -5,4 +5,4 @@ time \
 	$PROJECT_ROOT/ansible/play \
 	$PROJECT_ROOT/ansible/playbook.yml \
 	-i $PROJECT_ROOT/ansible/hosts.yml \
-	--tags "deps,deploy"
+	--tags "deps,compose"

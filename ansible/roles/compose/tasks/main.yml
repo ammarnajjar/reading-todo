@@ -1,5 +1,5 @@
 ---
-# tasks file for deploy
+# tasks file for compose
 
 - name: Tear down existing services
   docker_compose:
