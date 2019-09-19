@@ -11,7 +11,7 @@ spec:
         name: '{{ .Values.postgres.name }}'
     spec:
       hostname: '{{ .Values.postgres.name }}'
-      subdomain: '{{ .Values.postgres.name }}'
+      subdomain: '{{ .Values.postgres.subdomain }}'
       containers:
         - name: '{{ .Values.postgres.name }}'
           image: '{{ .Values.postgres.image }}'

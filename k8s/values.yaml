@@ -16,13 +16,13 @@ docs:
 postgres:
   name: postgres
   image: reading-todo/postgres
-  subdomain: postgres
+  subdomain: postgres-subdomain
   svcname: postgres-svc
   portType: NodePort
 
 adminer:
   name: adminer
   image: adminer
-  subdomain: adminer
+  subdomain: adminer-subdomain
   svcname: adminer-svc
   portType: NodePort
