@@ -2,6 +2,7 @@
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel)"
 time \
-	$PROJECT_ROOT/ansible/play \
+	$PROJECT_ROOT/bin/play \
 	$PROJECT_ROOT/ansible/playbook.yml \
-	-i $PROJECT_ROOT/ansible/hosts.yml
+	-i $PROJECT_ROOT/ansible/hosts.yml \
+	--tags "deps,ci"

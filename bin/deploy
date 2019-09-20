@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+
+if [ "$1" != "up" ] && [ "$1" != "down" ]
+then
+	echo "Usage: deploy [up,down]"
+fi
+
+if [ "$1" = "up" ]
+then
+	tilt up \
+		--hud=false \
+		--no-browser \
+		--watch=false \
+		--file $PROJECT_ROOT/k8s/Tiltfile
+	echo "* Cluster is up."
+fi
+
+if [ "$1" = "down" ]
+then
+	tilt down \
+		--file $PROJECT_ROOT/k8s/Tiltfile
+	echo "* Cluster is down."
+fi

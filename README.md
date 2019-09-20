@@ -22,6 +22,20 @@ I am starting this maily for educational purposes.
   docker-compose up --build
   ```
 
+- Using [tilt](https://tilt.dev/):
+
+  - Deploy:
+
+    ```bash
+    tilt up --no-browser --hud=false --watch=false
+    ```
+
+  - Access to client:
+
+    ```bash
+    kubectl port-forward deployment/client 3300:80
+    ```
+
 - Using [direnv](https://github.com/direnv/direnv):
 
   Source the `.envrc` file which adds some scripts to the `PATH`
@@ -29,9 +43,11 @@ I am starting this maily for educational purposes.
   ```bash
   ci        # => run ci pipeline
 
-  deploy    # => deploy locally
+  compose   # => docker-compose locally
 
-  cicd      # => run ci pipeline then deploy locally
+  cicd      # => run ci pipeline then compose
+
+  deploy    # => deploy to kubernetes locally
   ```
 
 ### Browse the deployment
