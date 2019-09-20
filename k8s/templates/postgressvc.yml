@@ -8,6 +8,6 @@ spec:
     name: '{{ .Values.postgres.name }}'
   ports:
     - name: postgres-ports # Actually, no port is needed.
-      port: 2345
-      targetPort: 2345
+      port: 5432
+      targetPort: 5432
       protocol: TCP
