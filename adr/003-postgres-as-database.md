@@ -18,6 +18,7 @@ For the project a RDBMS need to be chosen and adopted.
 
 Why:
 
+- Open source.
 - Free.
 - Available for many operating systems.
 - Its SQL implementation closely follows ANSI standards.
