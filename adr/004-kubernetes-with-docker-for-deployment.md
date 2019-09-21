@@ -28,6 +28,12 @@ Why:
 
 - Open source
 - Free
+- Service discovery and load balancing
+- Storage orchestration
+- Automated rollouts and rollbacks
+- Automatic bin packing
+- Self-healing
+- Secret and configuration management
 - Available for many operating systems.
 - Widely used and well documented, so finding help is no issue.
 - Docker support.
