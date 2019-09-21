@@ -1,5 +1,16 @@
-DROP TABLE IF EXISTS todo;
-CREATE TABLE todo (id serial PRIMARY KEY, title varchar);
+DROP TABLE IF EXISTS books;
+CREATE TABLE books (
+  id serial PRIMARY KEY,
+  title varchar(200),
+  category varchar(100),
+  sub_category varchar(100),
+  year CHAR(4),
+  author varchar(200)
+);
+SELECT
+  *
+FROM
+  books;
 -- Show databases
 SELECT
   *
