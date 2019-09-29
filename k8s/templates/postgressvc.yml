@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: '{{ .Values.postgres.subdomain }}'
+spec:
+  clusterIp: None
+  selector:
+    name: '{{ .Values.postgres.name }}'
+  ports:
+    - name: postgres-ports # Actually, no port is needed.
+      port: 5432
+      targetPort: 5432
+      protocol: TCP

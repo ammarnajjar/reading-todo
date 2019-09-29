@@ -1,7 +1,26 @@
-client: reading-todo/client
-docs: reading-todo/docs
-
 memoryrequest: '200Mi'
 cpurequest: '0.1'
 memorylimit: '1Gi'
 cpulimit: '1.5'
+
+client:
+  name: client
+  image: reading-todo/client
+  portType: NodePort
+
+docs:
+  name: docs
+  image: reading-todo/docs
+  portType: NodePort
+
+postgres:
+  name: postgres
+  image: reading-todo/postgres
+  subdomain: postgres-subdomain
+  svcname: postgres-svc
+  portType: NodePort
+
+adminer:
+  name: adminer
+  image: adminer
+  portType: NodePort

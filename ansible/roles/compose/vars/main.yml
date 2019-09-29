@@ -1,0 +1,8 @@
+---
+# vars file for compose
+
+project_src: '..'
+client_container_name: 'reading_todo_client'
+docs_container_name: 'reading_todo_docs'
+postgres_container_name: 'reading_todo_postgres'
+adminer_container_name: 'reading_todo_adminer'

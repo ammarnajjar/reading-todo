@@ -1,6 +1,0 @@
----
-# vars file for deploy
-
-project_src: '..'
-client_container_name: 'reading_todo_client'
-docs_container_name: 'reading_todo_docs'

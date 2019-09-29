@@ -14,3 +14,20 @@ services:
     build: docs/
     ports:
       - $DOCS_LIVE_PORT:$NGINX_PORT
+
+  db:
+    image: $POSTRGES_IMAGE_NAME
+    container_name: $POSTRGES_CONTAINER_NAME
+    build: db/
+    ports:
+      - $POSTGRES_PORT:$POSTGRES_PORT
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    restart: always
+
+  adminer:
+    image: $ADMINER_IMAGE_NAME
+    container_name: $ADMINER_CONTAINER_NAME
+    ports:
+      - $ADMINER_PORT:$ADMINER_PORT
+    restart: always

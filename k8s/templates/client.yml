@@ -1,18 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: client
+  name: '{{ .Values.client.name }}'
 spec:
   replicas: 1
   template:
     metadata:
-      name: client
+      name: '{{ .Values.client.name }}'
       labels:
-        app: client
+        app: '{{ .Values.client.name }}'
     spec:
       containers:
-        - name: client
-          image: '{{ .Values.client }}'
+        - name: '{{ .Values.client.name }}'
+          image: '{{ .Values.client.image }}'
           imagePullPolicy: Always
           resources:
             requests:
@@ -21,9 +21,8 @@ spec:
             limits:
               memory: '{{ .Values.memorylimit }}'
               cpu: '{{ .Values.cpulimit }}'
-          env:
-            - name: no_proxy
-              value: 'localhost,127.0.0.1'
           ports:
-            - containerPort: 80
+            - containerPort: 3300
               protocol: TCP
+      nodeSelector:
+        kubernetes.io/hostname: docker-desktop
