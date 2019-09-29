@@ -1,4 +1,4 @@
-# Postgres as the RDBMS
+# PostgreSQL as the RDBMS
 
 Date: Thu Sep 19 21:42:04 CEST 2019
 
@@ -12,7 +12,7 @@ For the project a RDBMS need to be chosen and adopted.
 
 ## Decision
 
-- [Postrgres](https://www.postgresql.org/) will be the relational database management system of choice.
+- [PostrgreSQL](https://www.postgresql.org/) will be the relational database management system of choice.
 
 ## Consequences
 
