@@ -1,16 +1,25 @@
 DROP TABLE IF EXISTS books;
 CREATE TABLE books (
-  id serial PRIMARY KEY,
-  title varchar(200),
-  category varchar(100),
-  sub_category varchar(100),
-  year CHAR(4),
-  author varchar(200)
+  isbn varchar(50) PRIMARY KEY,
+  title varchar(300),
+  year char(4),
+  category varchar(300),
+  sub_category varchar(300)
 );
+DROP TABLE IF EXISTS authors;
+CREATE TABLE authors (isbn varchar(50), name varchar(300));
+ALTER TABLE
+  authors
+ADD
+  FOREIGN KEY (isbn) REFERENCES books (isbn);
 SELECT
   *
 FROM
   books;
+SELECT
+  *
+FROM
+  authors;
 -- Show databases
 SELECT
   *
