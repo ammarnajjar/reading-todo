@@ -1,4 +1,4 @@
-# Two Table Database
+# Database Tables
 
 Date: Sun Sep 29 06:32:35 CEST 2019
 
@@ -12,12 +12,12 @@ For the project a database structure need to be chosen and adopted.
 
 ## Decision
 
-Two table database will be used as this point:
+Three table database will be used at this point:
 
 ![database structure](./assets/db_structure.png)
 
 ```
-Table books {
+Table book {
   isbn varchar(50) [pk]
   title varchar(300)
   year char(4)
@@ -25,9 +25,15 @@ Table books {
   sub_category varchar(300)
 }
 
-Table authors {
-  isbn varchar(50) [ref: > books.isbn]
+
+Table author {
+  id bigserial [pk]
   name varchar(300)
+}
+
+Table book_author {
+  book_isbn varchar(50) [ref: > book.isbn]
+  author_id bigint [ref: > author.id]
 }
 ```
 
@@ -35,9 +41,5 @@ Table authors {
 
 Why:
 
-- Simple
-- Clean
-
-Why not:
-
-- All could be combined in one table.
+- A book might have multiple authors.
+- An author might have written multiple books.
