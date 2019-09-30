@@ -1,39 +1,53 @@
-CREATE SCHEMA readiing_todo;
-DROP TABLE IF EXISTS readiing_todo.book;
-CREATE TABLE readiing_todo.book (
+CREATE SCHEMA reading;
+DROP TABLE IF EXISTS reading.book;
+CREATE TABLE reading.book (
   isbn varchar(50) PRIMARY KEY,
   title varchar(300),
   year char(4),
   category varchar(300),
   sub_category varchar(300)
 );
-COMMENT ON TABLE readiing_todo.book IS 'Book to read';
-DROP TABLE IF EXISTS readiing_todo.author;
-CREATE TABLE readiing_todo.author (id bigserial PRIMARY KEY, name varchar(300));
-COMMENT ON TABLE readiing_todo.author IS 'Auther of the book';
-DROP TABLE IF EXISTS readiing_todo.book_author;
-CREATE TABLE readiing_todo.book_author (book_isbn varchar(50), author_id bigint);
-COMMENT ON TABLE readiing_todo.book_author IS 'Book <-> Author';
+COMMENT ON TABLE reading.book IS 'Book to read';
+DROP TABLE IF EXISTS reading.author;
+CREATE TABLE reading.author (id bigint PRIMARY KEY, name varchar(300));
+COMMENT ON TABLE reading.author IS 'Auther of the book';
+DROP TABLE IF EXISTS reading.book_author;
+CREATE TABLE reading.book_author (
+  book_isbn varchar(50),
+  author_id bigint,
+  PRIMARY KEY (book_isbn, author_id)
+);
+COMMENT ON TABLE reading.book_author IS 'Book <-> Author';
 ALTER TABLE
-  readiing_todo.book_author
+  reading.book_author
 ADD
-  FOREIGN KEY (book_isbn) REFERENCES readiing_todo.book (isbn);
+  FOREIGN KEY (book_isbn) REFERENCES reading.book (isbn);
 ALTER TABLE
-  readiing_todo.book_author
+  reading.book_author
 ADD
-  FOREIGN KEY (author_id) REFERENCES readiing_todo.author (id);
+  FOREIGN KEY (author_id) REFERENCES reading.author (id);
+CREATE FUNCTION "book_authorsByBookId"(b reading.book)
+RETURNS setof reading.author AS $$
+SELECT
+  author.*
+FROM
+  reading.author
+  INNER JOIN reading.book_author ON (reading.book_author.author_id = author.id)
+WHERE
+  reading.book_author.book_isbn = b.isbn;
+$$ LANGUAGE SQL stable;
 SELECT
   *
 FROM
-  readiing_todo.book;
+  reading.book;
 SELECT
   *
 FROM
-  readiing_todo.author;
+  reading.author;
 SELECT
   *
 FROM
-  readiing_todo.book_author;
+  reading.book_author;
 -- Show databases
 SELECT
   *
