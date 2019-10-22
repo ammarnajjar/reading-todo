@@ -1,4 +1,4 @@
-FROM node as build-env
+FROM node:alpine as build-env
 
 WORKDIR /client
 
