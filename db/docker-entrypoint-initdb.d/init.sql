@@ -36,6 +36,20 @@ FROM
 WHERE
   reading.book_author.book_isbn = b.isbn;
 $$ LANGUAGE SQL stable;
+
+INSERT INTO
+  reading.book (isbn, title, year, category, sub_category)
+VALUES
+  ('12345', 'book1', '1990', 'cat1', 'sub-cat1');
+INSERT INTO
+  reading.author (id, name)
+VALUES
+  (1, 'author 1');
+INSERT INTO
+  reading.book_author (book_isbn, author_id)
+VALUES
+  ('12345', 1);
+
 SELECT
   *
 FROM

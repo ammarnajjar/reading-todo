@@ -1,0 +1,111 @@
+const { ApolloServer, gql } = require("apollo-server");
+
+const { find, filter } = require("lodash");
+// Construct a schema, using GraphQL schema language
+const typeDefs = gql`
+  type Book {
+    isbn: String!
+    title: String!
+    year: String
+    category: String
+    sub_category: String
+    authors: [Author!]!
+  }
+
+  type Author {
+    id: Int!
+    name: String!
+    books: [Book!]!
+  }
+
+  type Query {
+    allAuthors: [Author!]!
+    allBooks: [Book!]!
+    book: Book
+    author: Author
+  }
+`;
+
+let books = [];
+let authors = [
+  {
+    id: 1,
+    name: "J.R.Toklini"
+  },
+  {
+    id: 2,
+    name: "Agatha Christie"
+  }
+];
+
+books = [
+  {
+    isbn: "1234",
+    title: "Harry Potter and the Chamber of Secrets",
+    year: "1990",
+    category: "scifi",
+    sub_category: "no category",
+    authors: [authors[0]]
+  },
+  {
+    isbn: "41235",
+    title: "Jurassic Park",
+    year: "2001",
+    category: "fiction",
+    sub_category: "no category",
+    authors: [authors[1]]
+  }
+];
+authors[0].books = [books[0]];
+authors[1].books = [books[1]];
+
+// Provide resolver functions for your schema fields
+const resolvers = {
+  Query: {
+    allBooks: () => books,
+    allAuthors: () => authors,
+    book(parent, args, context, info) {
+      return find(books, { isbn: args.isbn });
+    },
+    author(parent, args, context, info) {
+      return find(authors, { id: args.id });
+    }
+  },
+  Author: {
+    books(author) {
+      return filter(books, book =>
+        author.books.map(x => x.title).includes(book.title)
+      );
+    }
+  },
+  Book: {
+    authors(book) {
+      return filter(authors, author =>
+        book.authors.map(x => x.name).includes(author.name)
+      );
+    }
+  }
+};
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers
+});
+
+server.listen().then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});
+
+
+# Write your query or mutation here
+{
+  allBooks {
+    isbn
+    authors {
+      name
+      books {
+        title
+      }
+    }
+  }
+}
