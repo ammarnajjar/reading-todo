@@ -16,7 +16,7 @@ jobs:
       - name: Set Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@master
         with:
-          version: ${{ matrix.node_version }}
+          node-version: ${{ matrix.node_version }}
 
       - name: Update npm
         run: |
