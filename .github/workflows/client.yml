@@ -22,7 +22,6 @@ jobs:
         run: |
           cd client
           npm ci
-          ls -la
       - name: Lint React
         run: |
           cd client
