@@ -1,7 +1,5 @@
 # reading-todo
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0f1a98c217314d70a26c537a69e9daad)](https://www.codacy.com/manual/ammarnajjar/reading-todo?utm_source=github.com&utm_medium=referral&utm_content=ammarnajjar/reading-todo&utm_campaign=Badge_Grade)
-
 An app to manage a reading todo list
 
 I am starting this maily for educational purposes.
