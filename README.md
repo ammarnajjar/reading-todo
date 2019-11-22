@@ -25,6 +25,12 @@ I am starting this maily for educational purposes.
   docker-compose up --build
   ```
 
+- Using [podman-compose](https://github.com/containers/podman-compose):
+
+  ```bash
+  sudo podman-compose up --build
+  ```
+
 - Using [tilt](https://tilt.dev/):
 
   - Deploy:
@@ -55,6 +61,6 @@ I am starting this maily for educational purposes.
 
 ### Browse the deployment
 
-- Docs: [localhost:3100](http://localhost:3100/)
-- Dev: [localhost:3200](http://localhost:3200/)
+- Client: [localhost:3100](http://localhost:3100/)
+- Docs: [localhost:3200](http://localhost:3200/)
 - Prod: [localhost:3300](http://localhost:3300/)
