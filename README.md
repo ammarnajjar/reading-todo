@@ -1,7 +1,9 @@
 # reading-todo
 
+[![2018-Pipeline](https://github.com/ammarnajjar/reading-todo/workflows/Client-CI/badge.svg)](https://github.com/ammarnajjar/reading-todo/actions)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/ammarnajjar/reading-todo.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ammarnajjar/reading-todo/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/ammarnajjar/reading-todo.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ammarnajjar/reading-todo/context:javascript)
+[![Maintainability](https://api.codeclimate.com/v1/badges/793469291a411ffc446c/maintainability)](https://codeclimate.com/github/ammarnajjar/reading-todo/maintainability)
 
 An app to manage a reading todo list
 
