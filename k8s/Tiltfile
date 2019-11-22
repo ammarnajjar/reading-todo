@@ -8,7 +8,7 @@ docker_build('reading-todo/postgres', '../db')
 docker_build('reading-todo/docs', '../docs')
 
 k8s_resource('client', port_forwards=3300)
-k8s_resource('docs', port_forwards=3100)
+k8s_resource('docs', port_forwards=3200)
 k8s_resource('postgres', port_forwards=5432)
 k8s_resource('adminer', port_forwards=8080)
 

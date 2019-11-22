@@ -22,7 +22,7 @@ spec:
               memory: '{{ .Values.memorylimit }}'
               cpu: '{{ .Values.cpulimit }}'
           ports:
-            - containerPort: 3100
+            - containerPort: 3200
               protocol: TCP
       nodeSelector:
         kubernetes.io/hostname: docker-desktop

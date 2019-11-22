@@ -11,4 +11,5 @@ RUN chmod 777 /docs/Dockerfile
 RUN bundle exec jekyll build -b ''
 
 FROM nginx:alpine
+COPY --from=build-env /docs/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build-env /docs/_site /usr/share/nginx/html
