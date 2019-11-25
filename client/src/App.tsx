@@ -1,31 +1,42 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-class Square extends React.Component<{ value: string }> {
+class Square extends React.Component<{
+  value: string;
+  onClick: (event: any) => void;
+}> {
   static propTypes = {
     value: PropTypes.string,
+    onClick: PropTypes.func,
   };
   render() {
-    return <button className="square">{this.props.value}</button>;
+    return (
+      <button className="square" onClick={this.props.onClick}>
+        {this.props.value}
+      </button>
+    );
   }
 }
 
 interface BoardState {
   squares: string[];
+  xIsNext: boolean;
 }
 
-class Board extends React.Component<any, BoardState> {
+export class Board extends React.Component<any, BoardState> {
   static propTypes = {
     squares: PropTypes.array,
   };
   constructor(props: BoardState) {
     super(props);
     this.state = {
-      squares: Array(9).fill('null'),
+      squares: Array(9).fill('#'),
+      xIsNext: true,
     };
   }
   render() {
-    const status = 'Next Player: X';
+    const nextPlayer = this.state.xIsNext ? 'X' : 'O';
+    const status = `Next Player: ${nextPlayer}`;
     return (
       <div>
         <div className="status">{status}</div>
@@ -39,17 +50,26 @@ class Board extends React.Component<any, BoardState> {
   }
 
   handleClick(i: number): void {
-    return;
+    const squares = this.state.squares.slice();
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    const xIsNext = !this.state.xIsNext;
+    this.setState({
+      squares: squares,
+      xIsNext: xIsNext,
+    });
   }
 
   renderSquare(i: number): any {
-    const value = this.state.squares[i];
-    return <Square key={i} value={value} />;
+    return (
+      <Square
+        key={i}
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    );
   }
 }
 
-const App: React.FunctionComponent = () => {
+export const App: React.FunctionComponent = () => {
   return <Board />;
 };
-
-export default App;
