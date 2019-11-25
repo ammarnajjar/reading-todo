@@ -21,16 +21,16 @@ jobs:
       - name: Update npm
         run: |
           cd client
-          npm ci
+          yarn install --frozen-lockfile
       - name: Lint React
         run: |
           cd client
-          npm run lint
+          yarn lint
       - name: Run tests
         run: |
           cd client
-          npm run test:ci
+          yarn test --coverage --watchAll false
       - name: Build Client
         run: |
           cd client
-          npm run build
+          yarn build

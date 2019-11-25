@@ -7,19 +7,48 @@
     "@types/node": "12.12.12",
     "@types/react": "16.9.13",
     "@types/react-dom": "16.9.4",
+    "@typescript-eslint/eslint-plugin": "2.8.0",
+    "@typescript-eslint/parser": "2.8.0",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-config-react": "1.1.7",
+    "eslint-plugin-jest": "23.0.4",
+    "eslint-plugin-prettier": "3.1.1",
+    "prettier": "1.19.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-scripts": "3.2.0",
     "typescript": "3.7.2"
   },
   "scripts": {
+    "lint": "eslint src/**/*.{ts,tsx}",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage",
+    "test:ci": "react-scripts test --coverage --watchAll false",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "jest": {
+    "collectCoverageFrom": [
+      "src/*.{js,jsx,ts,tsx}",
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/index*",
+      "!src/serviceWorker*",
+      "!src/react-app-env.d.*",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/build/",
+      "!<rootDir>/public/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "coverageReporters": [
+      "text"
+    ]
   },
   "browserslist": {
     "production": [
