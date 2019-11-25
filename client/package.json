@@ -2,35 +2,21 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "dependencies": {
+    "@types/jest": "24.0.23",
+    "@types/node": "12.12.12",
+    "@types/react": "16.9.13",
+    "@types/react-dom": "16.9.4",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-scripts": "3.2.0",
+    "typescript": "3.7.2"
+  },
   "scripts": {
-    "lint": "eslint src/**/*.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
-    "test:ci": "react-scripts test --coverage --watchAll false",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/*.{js,jsx,ts,tsx}",
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/index*",
-      "!src/serviceWorker*",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/build/",
-      "!<rootDir>/public/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 95,
-        "functions": 95,
-        "lines": 95,
-        "statements": 95
-      }
-    },
-    "coverageReporters": [
-      "text"
-    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,24 +32,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "dependencies": {
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "react-scripts": "3.2.0"
-  },
-  "devDependencies": {
-    "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.15.1",
-    "eslint": "6.7.0",
-    "eslint-config-standard": "14.1.0",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jest": "23.0.4",
-    "eslint-plugin-node": "10.0.0",
-    "eslint-plugin-promise": "4.2.1",
-    "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-standard": "4.0.1",
-    "react-test-renderer": "16.12.0",
-    "typescript": "3.7.2"
   }
 }
