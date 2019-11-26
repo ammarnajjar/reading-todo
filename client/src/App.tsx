@@ -1,75 +1,76 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-class Square extends React.Component<{
-  value: string;
-  onClick: (event: any) => void;
-}> {
-  static propTypes = {
-    value: PropTypes.string,
-    onClick: PropTypes.func,
-  };
-  render() {
-    return (
-      <button className="square" onClick={this.props.onClick}>
-        {this.props.value}
-      </button>
-    );
-  }
+interface Book {
+  id: number;
+  title: string;
+  author: string;
 }
 
-interface BoardState {
-  squares: string[];
-  xIsNext: boolean;
+interface BaseState {
+  books: Book[];
 }
 
-export class Board extends React.Component<any, BoardState> {
-  static propTypes = {
-    squares: PropTypes.array,
-  };
-  constructor(props: BoardState) {
-    super(props);
-    this.state = {
-      squares: Array(9).fill('#'),
-      xIsNext: true,
-    };
-  }
+export class BookElement extends React.Component<Book, Book> {
   render() {
-    const nextPlayer = this.state.xIsNext ? 'X' : 'O';
-    const status = `Next Player: ${nextPlayer}`;
     return (
-      <div>
-        <div className="status">{status}</div>
-        {[0, 3, 6].map(i => (
-          <div key={i} className="board-row">
-            {[i, i + 1, i + 2].map(j => this.renderSquare(j))}
-          </div>
-        ))}
+      <div className="book">
+        <span>{this.props.id}</span>
+        <span>{this.props.title}</span>
+        <span>{this.props.author}</span>
       </div>
     );
   }
+}
 
-  handleClick(i: number): void {
-    const squares = this.state.squares.slice();
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    const xIsNext = !this.state.xIsNext;
-    this.setState({
-      squares: squares,
-      xIsNext: xIsNext,
-    });
+export class Base extends React.Component<BaseState, BaseState> {
+  static proptTypes = {
+    author: PropTypes.string,
+    title: PropTypes.string,
+  };
+  constructor(props: BaseState) {
+    super(props);
+    this.state = {
+      books: props.books,
+    };
   }
-
-  renderSquare(i: number): any {
+  renderBook(book: Book) {
     return (
-      <Square
-        key={i}
-        value={this.state.squares[i]}
-        onClick={() => this.handleClick(i)}
+      <BookElement
+        key={book.id}
+        id={book.id}
+        author={book.author}
+        title={book.title}
       />
+    );
+  }
+  render() {
+    return (
+      <div className="base">
+        {this.state.books.map(book => this.renderBook(book))}
+      </div>
     );
   }
 }
 
+const books: Book[] = [
+  {
+    id: 1,
+    author: 'auth1',
+    title: 'title1',
+  },
+  {
+    id: 2,
+    author: 'auth2',
+    title: 'title2',
+  },
+  {
+    id: 3,
+    author: 'auth3',
+    title: 'title3',
+  },
+];
+
 export const App: React.FunctionComponent = () => {
-  return <Board />;
+  return <Base books={books} />;
 };
