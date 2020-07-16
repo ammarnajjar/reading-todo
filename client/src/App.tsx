@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import './App.css';
 
 interface Book {
   id: number;
@@ -29,7 +30,71 @@ export class BookElement extends React.Component<Book, Book> {
   }
 }
 
-export class BooksTable extends React.Component<BaseState, BaseState> {
+class Modal extends React.Component<{
+  show: boolean;
+  handleClose: any;
+  children: any;
+}> {
+  static proptTypes = {
+    show: PropTypes.bool,
+    handleClose: PropTypes.func,
+    children: PropTypes.element,
+  };
+  render() {
+    const showHideClassName = this.props.show
+      ? 'modal display-block'
+      : 'modal display-none';
+    return (
+      <div className={showHideClassName}>
+        <section className="modal-main">
+          {this.props.children}
+          <button onClick={this.props.handleClose}>close</button>
+        </section>
+      </div>
+    );
+  }
+}
+
+export class BookEdit extends React.Component<{}, {}> {
+  addBook(): void {
+    console.log('adding a book');
+  }
+  render() {
+    return (
+      <table className="books">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" id="bookId" name="bookId" />
+            </td>
+            <td>
+              <input type="text" id="bookTitle" name="bookTitle" />
+            </td>
+            <td>
+              <input type="text" id="bookAuthor" name="bookAuthor" />
+            </td>
+            <td>
+              <button onClick={() => this.addBook()}>Add</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  }
+}
+
+export class BooksTable extends React.Component<
+  BaseState,
+  { showModal: boolean; books: Book[] }
+> {
   static proptTypes = {
     author: PropTypes.string,
     title: PropTypes.string,
@@ -38,7 +103,18 @@ export class BooksTable extends React.Component<BaseState, BaseState> {
     super(props);
     this.state = {
       books: props.books,
+      showModal: false,
     };
+  }
+  showModal(): void {
+    this.setState({ showModal: true });
+  }
+  hideModal(): void {
+    this.setState({ showModal: false });
+  }
+  addBook() {
+    console.log('adding a book');
+    this.showModal();
   }
   renderBook(book: Book) {
     return (
@@ -53,7 +129,10 @@ export class BooksTable extends React.Component<BaseState, BaseState> {
   render() {
     return (
       <div className="base">
-        <button>Add Book</button>
+        <Modal show={this.state.showModal} handleClose={() => this.hideModal()}>
+          <BookEdit />
+        </Modal>
+        <button onClick={() => this.showModal()}>Add Book</button>
         <table className="books">
           <thead>
             <tr>
