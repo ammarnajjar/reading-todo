@@ -55,8 +55,14 @@ class Modal extends React.Component<{
   }
 }
 
-export class BookEdit extends React.Component<{}, Partial<Book>> {
-  constructor(props: {}) {
+export class BookEdit extends React.Component<
+  { onBookAdded: any },
+  Partial<Book>
+> {
+  static proptTypes = {
+    onBookAdded: PropTypes.func,
+  };
+  constructor(props: { onBookAdded: any }) {
     super(props);
     this.state = {
       title: '',
@@ -70,6 +76,7 @@ export class BookEdit extends React.Component<{}, Partial<Book>> {
       author: this.state.author,
     };
     console.log(book);
+    this.props.onBookAdded(book);
     this.setState({
       title: '',
       author: '',
@@ -140,6 +147,11 @@ export class BooksTable extends React.Component<
     console.log('adding a book');
     this.showModal();
   }
+  onBookAdded = (book: Book) => {
+    this.setState({
+      books: [book, ...this.state.books],
+    });
+  };
   renderBook(book: Book) {
     return (
       <BookElement
@@ -154,7 +166,7 @@ export class BooksTable extends React.Component<
     return (
       <div className="base">
         <Modal show={this.state.showModal} handleClose={() => this.hideModal()}>
-          <BookEdit />
+          <BookEdit onBookAdded={this.onBookAdded} />
         </Modal>
         <button onClick={() => this.showModal()}>Add Book</button>
         <table className="books">
