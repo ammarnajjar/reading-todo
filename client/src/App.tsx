@@ -55,16 +55,27 @@ class Modal extends React.Component<{
   }
 }
 
-export class BookEdit extends React.Component<{}, {}> {
+export class BookEdit extends React.Component<{}, Partial<Book>> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      title: '',
+      author: '',
+    };
+  }
   addBook(): void {
     console.log('adding a book');
+    const book: Partial<Book> = {
+      title: this.state.title,
+      author: this.state.author,
+    };
+    console.log(book);
   }
   render() {
     return (
       <table className="books">
         <thead>
           <tr>
-            <th>id</th>
             <th>Title</th>
             <th>Author</th>
             <th>Action</th>
@@ -73,13 +84,22 @@ export class BookEdit extends React.Component<{}, {}> {
         <tbody>
           <tr>
             <td>
-              <input type="text" id="bookId" name="bookId" />
+              <input
+                type="text"
+                id="bookTitle"
+                name="bookTitle"
+                value={this.state.title}
+                onChange={e => this.setState({ title: e.target.value })}
+              />
             </td>
             <td>
-              <input type="text" id="bookTitle" name="bookTitle" />
-            </td>
-            <td>
-              <input type="text" id="bookAuthor" name="bookAuthor" />
+              <input
+                type="text"
+                id="bookAuthor"
+                name="bookAuthor"
+                value={this.state.author}
+                onChange={e => this.setState({ author: e.target.value })}
+              />
             </td>
             <td>
               <button onClick={() => this.addBook()}>Add</button>
