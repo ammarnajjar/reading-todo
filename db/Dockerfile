@@ -1,4 +1,4 @@
-FROM postgres:12.0
+FROM postgres:12.3
 
 ENV PGDATA=/data
 ENV POSTGRES_USER=ammar
