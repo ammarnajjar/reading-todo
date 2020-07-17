@@ -70,6 +70,10 @@ export class BookEdit extends React.Component<{}, Partial<Book>> {
       author: this.state.author,
     };
     console.log(book);
+    this.setState({
+      title: '',
+      author: '',
+    });
   }
   render() {
     return (
