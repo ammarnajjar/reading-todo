@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './App.css';
 
 interface Book {
   id: number;
-  title: string;
-  author: string;
+  title?: string;
+  author?: string;
 }
 
 interface BaseState {
@@ -16,7 +16,7 @@ export class BookElement extends React.Component<Book, Book> {
   deleteBook(): void {
     console.log(`deleting book ${this.props.title}`);
   }
-  render() {
+  render(): ReactElement {
     return (
       <tr>
         <td>{this.props.id}</td>
@@ -32,15 +32,15 @@ export class BookElement extends React.Component<Book, Book> {
 
 class Modal extends React.Component<{
   show: boolean;
-  handleClose: any;
-  children: any;
+  handleClose: () => void;
+  children: ReactElement | null;
 }> {
   static proptTypes = {
     show: PropTypes.bool,
     handleClose: PropTypes.func,
     children: PropTypes.element,
   };
-  render() {
+  render(): ReactElement {
     const showHideClassName = this.props.show
       ? 'modal display-block'
       : 'modal display-none';
@@ -56,13 +56,13 @@ class Modal extends React.Component<{
 }
 
 export class BookEdit extends React.Component<
-  { onBookAdded: any },
+  { onBookAdded: (book: Partial<Book>) => void },
   Partial<Book>
 > {
   static proptTypes = {
     onBookAdded: PropTypes.func,
   };
-  constructor(props: { onBookAdded: any }) {
+  constructor(props: { onBookAdded: (book: Partial<Book>) => void }) {
     super(props);
     this.state = {
       title: '',
@@ -82,7 +82,7 @@ export class BookEdit extends React.Component<
       author: '',
     });
   }
-  render() {
+  render(): ReactElement {
     return (
       <table className="books">
         <thead>
@@ -124,7 +124,7 @@ export class BookEdit extends React.Component<
 
 export class BooksTable extends React.Component<
   BaseState,
-  { showModal: boolean; books: Book[] }
+  { showModal: boolean; books: Book[]; currentId: number }
 > {
   static proptTypes = {
     author: PropTypes.string,
@@ -134,6 +134,7 @@ export class BooksTable extends React.Component<
     super(props);
     this.state = {
       books: props.books,
+      currentId: 0,
       showModal: false,
     };
   }
@@ -147,9 +148,10 @@ export class BooksTable extends React.Component<
     console.log('adding a book');
     this.showModal();
   }
-  onBookAdded = (book: Book) => {
+  onBookAdded = (book: Partial<Book>) => {
     this.setState({
-      books: [book, ...this.state.books],
+      books: [{ id: this.state.currentId, ...book }, ...this.state.books],
+      currentId: this.state.currentId + 1,
     });
   };
   renderBook(book: Book) {
@@ -162,7 +164,7 @@ export class BooksTable extends React.Component<
       />
     );
   }
-  render() {
+  render(): ReactElement {
     return (
       <div className="base">
         <Modal show={this.state.showModal} handleClose={() => this.hideModal()}>
@@ -186,21 +188,21 @@ export class BooksTable extends React.Component<
 }
 
 const books: Book[] = [
-  {
-    id: 1,
-    author: 'auth1',
-    title: 'title1',
-  },
-  {
-    id: 2,
-    author: 'auth2',
-    title: 'This is a very long book title for testing',
-  },
-  {
-    id: 999999,
-    author: 'This is a very long book author name for testing',
-    title: 'title3',
-  },
+  // {
+  //   id: 1,
+  //   author: 'auth1',
+  //   title: 'title1',
+  // },
+  // {
+  //   id: 2,
+  //   author: 'auth2',
+  //   title: 'This is a very long book title for testing',
+  // },
+  // {
+  //   id: 999999,
+  //   author: 'This is a very long book author name for testing',
+  //   title: 'title3',
+  // },
 ];
 
 export const App: React.FunctionComponent = () => {
