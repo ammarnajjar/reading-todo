@@ -6,6 +6,7 @@ interface Book {
   id: number;
   title?: string;
   author?: string;
+  handleDelete: () => void;
 }
 
 interface BaseState {
@@ -13,9 +14,6 @@ interface BaseState {
 }
 
 export class BookElement extends React.Component<Book, Book> {
-  deleteBook(): void {
-    console.log(`deleting book ${this.props.title}`);
-  }
   render(): ReactElement {
     return (
       <tr>
@@ -23,7 +21,7 @@ export class BookElement extends React.Component<Book, Book> {
         <td>{this.props.title}</td>
         <td>{this.props.author}</td>
         <td>
-          <button onClick={() => this.deleteBook()}>Delete</button>
+          <button onClick={this.props.handleDelete}>Delete</button>
         </td>
       </tr>
     );
@@ -56,13 +54,20 @@ class Modal extends React.Component<{
 }
 
 export class BookEdit extends React.Component<
-  { onBookAdded: (book: Partial<Book>) => void },
+  {
+    onBookAdded: (book: Partial<Book>) => void;
+    onBookDeleted: (bookId: number) => void;
+  },
   Partial<Book>
 > {
   static proptTypes = {
     onBookAdded: PropTypes.func,
+    onBookDeleted: PropTypes.func,
   };
-  constructor(props: { onBookAdded: (book: Partial<Book>) => void }) {
+  constructor(props: {
+    onBookAdded: (book: Partial<Book>) => void;
+    onBookDeleted: (bookId: number) => void;
+  }) {
     super(props);
     this.state = {
       title: '',
@@ -148,9 +153,17 @@ export class BooksTable extends React.Component<
     console.log('adding a book');
     this.showModal();
   }
+  onBookDeleted(bookId: number): void {
+    this.setState({
+      books: this.state.books.filter(book => book.id !== bookId),
+    });
+  }
   onBookAdded = (book: Partial<Book>) => {
     this.setState({
-      books: [{ id: this.state.currentId, ...book }, ...this.state.books],
+      books: [
+        { ...book, id: this.state.currentId, handleDelete: () => {} },
+        ...this.state.books,
+      ],
       currentId: this.state.currentId + 1,
     });
   };
@@ -161,6 +174,7 @@ export class BooksTable extends React.Component<
         id={book.id}
         author={book.author}
         title={book.title}
+        handleDelete={() => this.onBookDeleted(book.id)}
       />
     );
   }
@@ -168,7 +182,10 @@ export class BooksTable extends React.Component<
     return (
       <div className="base">
         <Modal show={this.state.showModal} handleClose={() => this.hideModal()}>
-          <BookEdit onBookAdded={this.onBookAdded} />
+          <BookEdit
+            onBookAdded={this.onBookAdded}
+            onBookDeleted={this.onBookDeleted}
+          />
         </Modal>
         <button onClick={() => this.showModal()}>Add Book</button>
         <table className="books">
