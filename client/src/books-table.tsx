@@ -21,33 +21,38 @@ export class BooksTable extends React.Component<
       showModal: false,
     };
   }
+
   showModal(): void {
     this.setState({ showModal: true });
   }
+
   hideModal(): void {
     this.setState({ showModal: false });
   }
+
   onBookDeleted(bookId: number): void {
     console.log('onBookDeleted -> bookId', bookId);
-    this.setState({
-      books: this.state.books.filter(book => book.id !== bookId),
-    });
+    const books = this.state.books.filter(book => book.id !== bookId);
+    this.setState({ books });
   }
+
   onBookAdded = (book: Book) => {
+    const books = [
+      {
+        id: this.state.currentId,
+        title: book.title,
+        author: book.author,
+        handleDelete: () => {},
+      },
+      ...this.state.books,
+    ];
     this.setState({
-      books: [
-        {
-          id: this.state.currentId,
-          title: book.title,
-          author: book.author,
-          handleDelete: () => {},
-        },
-        ...this.state.books,
-      ],
+      books,
       currentId: this.state.currentId + 1,
     });
   };
-  renderBook(book: BookInDB) {
+
+  renderBook(book: BookInDB): ReactElement {
     return (
       <BookElement
         key={book.id}
@@ -58,31 +63,52 @@ export class BooksTable extends React.Component<
       />
     );
   }
+
+  renderAddButton(): ReactElement {
+    return (
+      <button id="modalBtn" onClick={() => this.showModal()}>
+        Add Book
+      </button>
+    );
+  }
+
+  renderBooksTable(): ReactElement {
+    return (
+      <table className="books">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>{this.state.books.map(book => this.renderBook(book))}</tbody>
+      </table>
+    );
+  }
+
+  renderModal(): ReactElement | null {
+    if (this.state.showModal) {
+      return (
+        <Modal handleClose={() => this.hideModal()}>
+          <BookEdit
+            onBookAdded={this.onBookAdded}
+            onBookDeleted={this.onBookDeleted}
+          />
+        </Modal>
+      );
+    } else {
+      return null;
+    }
+  }
+
   render(): ReactElement {
     return (
       <div className="base">
-        {this.state.showModal ? (
-          <Modal handleClose={() => this.hideModal()}>
-            <BookEdit
-              onBookAdded={this.onBookAdded}
-              onBookDeleted={this.onBookDeleted}
-            />
-          </Modal>
-        ) : null}
-        <button id="modalBtn" onClick={() => this.showModal()}>
-          Add Book
-        </button>
-        <table className="books">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>{this.state.books.map(book => this.renderBook(book))}</tbody>
-        </table>
+        {this.renderModal()}
+        {this.renderAddButton()}
+        {this.renderBooksTable()}
       </div>
     );
   }

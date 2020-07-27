@@ -32,7 +32,8 @@ export class BookEdit extends React.Component<PropsModel, Book> {
       author: '',
     });
   }
-  render(): ReactElement {
+
+  formTable(row: ReactElement) {
     return (
       <table className="books">
         <thead>
@@ -42,34 +43,51 @@ export class BookEdit extends React.Component<PropsModel, Book> {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              <input
-                type="text"
-                id="bookTitle"
-                name="bookTitle"
-                value={this.state.title}
-                onChange={e => this.setState({ title: e.target.value })}
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                id="bookAuthor"
-                name="bookAuthor"
-                value={this.state.author}
-                onChange={e => this.setState({ author: e.target.value })}
-              />
-            </td>
-            <td>
-              <button id="add" onClick={() => this.addBook()}>
-                Add
-              </button>
-            </td>
-          </tr>
-        </tbody>
+        <tbody>{row}</tbody>
       </table>
     );
+  }
+
+  titleInput() {
+    return (
+      <input
+        type="text"
+        id="bookTitle"
+        name="bookTitle"
+        value={this.state.title}
+        onChange={e => this.setState({ title: e.target.value })}
+      />
+    );
+  }
+
+  authorInput() {
+    return (
+      <input
+        type="text"
+        id="bookAuthor"
+        name="bookAuthor"
+        value={this.state.author}
+        onChange={e => this.setState({ author: e.target.value })}
+      />
+    );
+  }
+
+  addButton() {
+    return (
+      <button id="add" onClick={() => this.addBook()}>
+        Add
+      </button>
+    );
+  }
+
+  render(): ReactElement {
+    const rowForm = (
+      <tr>
+        <td>{this.titleInput()}</td>
+        <td>{this.authorInput()}</td>
+        <td>{this.addButton()}</td>
+      </tr>
+    );
+    return this.formTable(rowForm);
   }
 }
