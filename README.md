@@ -7,6 +7,8 @@
 
 An app to manage a reading todo list
 
+It is automatically deployed on [heroku](https://reading-todo.herokuapp.com/)
+
 I am starting this maily for educational purposes.
 
 ## Development:
