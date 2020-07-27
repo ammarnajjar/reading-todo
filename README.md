@@ -19,7 +19,7 @@ I am starting this maily for educational purposes.
 
 <details>
   <summary>
-- Using Ansible
+Ansible
   </summary>
 
 https://docs.ansible.com/ansible/latest/user_guide/playbooks.html
@@ -34,7 +34,7 @@ ansible/play ansible/playbook.yml -i ansible/hosts.yml
 
 <details>
   <summary>
-- Using docker-compose
+docker-compose
   </summary>
 
 https://docs.docker.com/compose/
@@ -47,7 +47,7 @@ docker-compose up --build
 
 <details>
   <summary>
-- Using podman-compose
+podman-compose
   </summary>
 
 https://github.com/containers/podman-compose
@@ -60,7 +60,7 @@ sudo podman-compose up --build
 
 <details>
   <summary>
-- Using tilt
+tilt
   </summary>
 
 https://tilt.dev/
@@ -81,7 +81,7 @@ https://tilt.dev/
 
 <details>
   <summary>
-- Using direnv
+direnv
   </summary>
 
 https://github.com/direnv/direnv

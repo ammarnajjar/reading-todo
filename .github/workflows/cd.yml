@@ -1,9 +1,9 @@
-name: CI
+name: CD
 
 on:
   push:
     tags:
-      - v**
+      - '**'
 
 jobs:
   build:
