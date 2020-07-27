@@ -1,25 +1,30 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import { App } from './App';
+import { Modal } from './modal';
 
-describe('Board', () => {
-  let container = null;
+describe('Modal', () => {
+  let container: Element | null = null;
 
   beforeEach(() => {
-    // setup a DOM element as a render target
     container = document.createElement('div');
     document.body.appendChild(container);
   });
 
   afterEach(() => {
-    // cleanup on exiting
-    unmountComponentAtNode(container);
+    if (container === null) {
+      return;
+    }
+    unmountComponentAtNode(container as Element);
     container.remove();
     container = null;
   });
 
   it('renders without crashing', () => {
-    render(<App />, container);
-    unmountComponentAtNode(container);
+    render(
+      <Modal show={true} handleClose={() => {}}>
+        <p>Child</p>
+      </Modal>,
+      container,
+    );
   });
 });

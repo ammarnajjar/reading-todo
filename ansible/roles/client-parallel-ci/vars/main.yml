@@ -16,6 +16,6 @@ all_containers:
     '{{ build_container_name }}',
   ]
 
-lint_cmd: 'npm run lint'
-test_cmd: 'npm run test:ci'
-build_cmd: 'npm run build'
+lint_cmd: 'yarn lint'
+test_cmd: 'yarn test:ci'
+build_cmd: 'yarn build'

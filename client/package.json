@@ -2,12 +2,34 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "dependencies": {
+    "@types/enzyme": "3.10.3",
+    "@types/jest": "24.0.23",
+    "@types/node": "12.12.12",
+    "@types/react": "16.9.13",
+    "@types/react-dom": "16.9.4",
+    "@typescript-eslint/eslint-plugin": "2.8.0",
+    "@typescript-eslint/parser": "2.8.0",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.15.1",
+    "eslint": "6.7.1",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-config-react": "1.1.7",
+    "eslint-plugin-jest": "23.0.4",
+    "eslint-plugin-prettier": "3.1.1",
+    "prettier": "1.19.1",
+    "react": "16.12.0",
+    "react-addons-test-utils": "15.6.2",
+    "react-dom": "16.12.0",
+    "react-scripts": "3.4.1",
+    "typescript": "3.9.6"
+  },
   "scripts": {
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint src/**/*.{ts,tsx}",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
-    "test:ci": "react-scripts test --coverage --watchAll false",
+    "test": "jest --watch --coverage",
+    "test:ci": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "jest": {
@@ -16,6 +38,7 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/index*",
       "!src/serviceWorker*",
+      "!src/react-app-env.d.*",
       "!<rootDir>/node_modules/",
       "!<rootDir>/build/",
       "!<rootDir>/public/"
@@ -32,9 +55,6 @@
       "text"
     ]
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -47,23 +67,10 @@
       "last 1 safari version"
     ]
   },
-  "dependencies": {
-    "react": "16.11.0",
-    "react-dom": "16.11.0",
-    "react-scripts": "3.2.0"
-  },
   "devDependencies": {
-    "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.15.1",
-    "eslint": "6.5.1",
-    "eslint-config-standard": "14.1.0",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jest": "22.20.0",
-    "eslint-plugin-node": "10.0.0",
-    "eslint-plugin-promise": "4.2.1",
+    "@types/enzyme-adapter-react-16": "1.0.5",
+    "enzyme-to-json": "3.4.3",
     "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-standard": "4.0.1",
-    "react-test-renderer": "16.11.0",
-    "typescript": "3.6.4"
+    "ts-jest": "24.2.0"
   }
 }

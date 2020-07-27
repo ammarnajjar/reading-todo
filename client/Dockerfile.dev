@@ -2,7 +2,8 @@ FROM node as build-env
 
 WORKDIR /client
 
-COPY package*.json ./
-RUN npm ci
+COPY package.json ./
+COPY yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 COPY . .
