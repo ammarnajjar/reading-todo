@@ -21,7 +21,7 @@ describe('Modal', () => {
 
   it('renders without crashing', () => {
     render(
-      <Modal show={true} handleClose={() => {}}>
+      <Modal handleClose={() => {}}>
         <p>Child</p>
       </Modal>,
       container,
