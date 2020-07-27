@@ -1,4 +1,4 @@
-name: Client
+name: CI
 
 on: [push]
 
@@ -7,8 +7,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: [14]
-        os: [ubuntu-latest]
+        node_version: [12, 14]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@main
@@ -34,9 +34,3 @@ jobs:
         run: |
           cd client
           yarn build
-      - name: Deploy to Heroku
-        env:
-          HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-          HEROKU_APP_NAME: 'reading-todo'
-        if: github.ref == 'refs/heads/main' && job.status == 'success'
-        run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git `git subtree split --prefix client main`:main --force
