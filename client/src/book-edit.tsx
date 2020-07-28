@@ -48,7 +48,7 @@ export class BookEdit extends React.Component<PropsModel, Book> {
     );
   }
 
-  titleInput() {
+  titleInput(): ReactElement {
     return (
       <input
         type="text"
@@ -60,7 +60,7 @@ export class BookEdit extends React.Component<PropsModel, Book> {
     );
   }
 
-  authorInput() {
+  authorInput(): ReactElement {
     return (
       <input
         type="text"
@@ -72,7 +72,7 @@ export class BookEdit extends React.Component<PropsModel, Book> {
     );
   }
 
-  addButton() {
+  addButton(): ReactElement {
     return (
       <button id="add" onClick={() => this.addBook()}>
         Add
