@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { BookEdit } from './book-edit';
@@ -33,11 +33,16 @@ describe('BookEdit mounted', () => {
   const mockBook = { title: 'title', author: 'author' };
   const originalState = { title: '', author: '' };
   const dumyLambda = () => {};
+  let component: ShallowWrapper;
+  let oat: BookEdit;
+  beforeEach(() => {
+    component = shallow(
+      <BookEdit onBookAdded={dumyLambda} onBookDeleted={dumyLambda} />,
+    );
+    oat = component.instance() as BookEdit;
+  });
   describe('addBook', () => {
     it('calls onBookAdded with the book from state', () => {
-      const oat = shallow(
-        <BookEdit onBookAdded={dumyLambda} onBookDeleted={dumyLambda} />,
-      ).instance() as BookEdit;
       oat.setState(mockBook);
       oat.addBook();
       expect(oat.state).toEqual(originalState);
@@ -45,10 +50,6 @@ describe('BookEdit mounted', () => {
   });
   describe('bookTitle input', () => {
     it('changes title in state according to its content change', () => {
-      const component = shallow(
-        <BookEdit onBookAdded={dumyLambda} onBookDeleted={dumyLambda} />,
-      );
-      const oat = component.instance() as BookEdit;
       oat.setState(mockBook);
       const event = {
         target: { value: 'mockTitle' },
@@ -59,10 +60,6 @@ describe('BookEdit mounted', () => {
   });
   describe('bookAuthor input', () => {
     it('changes author in state according to its content change', () => {
-      const component = shallow(
-        <BookEdit onBookAdded={dumyLambda} onBookDeleted={dumyLambda} />,
-      );
-      const oat = component.instance() as BookEdit;
       oat.setState(mockBook);
       const event = {
         target: { value: 'mockAuthor' },
@@ -73,10 +70,6 @@ describe('BookEdit mounted', () => {
   });
   describe('add button', () => {
     it('resets the state', () => {
-      const component = shallow(
-        <BookEdit onBookAdded={dumyLambda} onBookDeleted={dumyLambda} />,
-      );
-      const oat = component.instance() as BookEdit;
       oat.setState(mockBook);
       component.find('button').simulate('click');
       expect(oat.state).toEqual(originalState);
