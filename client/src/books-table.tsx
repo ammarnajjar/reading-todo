@@ -1,8 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { ReactElement } from 'react';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Row from 'react-bootstrap/Row';
 import { BookEdit } from './book-edit';
 import { BookElement } from './book-element';
-import { Modal } from './modal';
+import { AddModal } from './modal';
 import { Book, BookInDB, BooksTableProps } from './models';
 
 export class BooksTable extends React.Component<
@@ -66,37 +71,57 @@ export class BooksTable extends React.Component<
 
   renderAddButton(): ReactElement {
     return (
-      <button id="modalBtn" onClick={() => this.showModal()}>
-        Add Book
-      </button>
+      <Button
+        className="p-3"
+        variant="primary"
+        onClick={() => this.showModal()}
+      >
+        New Book
+      </Button>
     );
   }
 
   renderBooksTable(): ReactElement {
     return (
-      <table className="books">
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>{this.state.books.map(book => this.renderBook(book))}</tbody>
-      </table>
+      <Container fluid className="p-3">
+        <Jumbotron>
+          <Row>
+            <Col sm={9}>
+              <h1 className="header">Book List</h1>
+            </Col>
+            <Col sm={3}>{this.renderAddButton()}</Col>
+          </Row>
+        </Jumbotron>
+        <Row>
+          <Col className="m-1">
+            <span className="align-middle">
+              <strong>Title</strong>
+            </span>
+          </Col>
+          <Col className="m-1">
+            <span className="align-middle">
+              <strong>Author</strong>
+            </span>
+          </Col>
+          <Col className="m-1"></Col>
+        </Row>
+        {this.state.books.map(book => this.renderBook(book))}
+      </Container>
     );
   }
 
   renderModal(): ReactElement | null {
     if (this.state.showModal) {
       return (
-        <Modal handleClose={() => this.hideModal()}>
+        <AddModal
+          show={this.state.showModal}
+          handleClose={() => this.hideModal()}
+        >
           <BookEdit
             onBookAdded={this.onBookAdded}
             onBookDeleted={this.onBookDeleted}
           />
-        </Modal>
+        </AddModal>
       );
     } else {
       return null;
@@ -105,11 +130,10 @@ export class BooksTable extends React.Component<
 
   render(): ReactElement {
     return (
-      <div className="base">
+      <Container fluid>
         {this.renderModal()}
-        {this.renderAddButton()}
         {this.renderBooksTable()}
-      </div>
+      </Container>
     );
   }
 }
