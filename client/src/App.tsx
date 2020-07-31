@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.scss';
 import { BooksTable } from './books-table';
 import { BookInDB } from './models';
 
