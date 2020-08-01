@@ -32,26 +32,29 @@ export class BookEdit extends React.Component<PropsModel, Book> {
     this.props.onBookAdded(book);
   }
 
+  addCol(id: string, placeHolder: string, onChange: (e: any) => void) {
+    return (
+      <Col>
+        <Form.Control
+          type="text"
+          placeholder={placeHolder}
+          id={id}
+          onChange={onChange}
+        />
+      </Col>
+    );
+  }
+
   render(): ReactElement {
     return (
       <Form>
         <Form.Row>
-          <Col>
-            <Form.Control
-              type="text"
-              placeholder="Title"
-              id="title"
-              onChange={e => this.setState({ title: e.target.value })}
-            />
-          </Col>
-          <Col>
-            <Form.Control
-              type="text"
-              placeholder="Author"
-              id="author"
-              onChange={e => this.setState({ author: e.target.value })}
-            />
-          </Col>
+          {this.addCol('title', 'Title', e =>
+            this.setState({ title: e.target.value }),
+          )}
+          {this.addCol('author', 'Author', e =>
+            this.setState({ author: e.target.value }),
+          )}
           <Button variant="primary" id="add" onClick={() => this.addBook()}>
             Add
           </Button>

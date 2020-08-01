@@ -32,6 +32,9 @@ describe('BookEdit Element', () => {
 describe('BookEdit mounted', () => {
   const mockBook = { title: 'title', author: 'author' };
   const dumyLambda = () => {};
+  const event = {
+    target: { value: 'mockEvent' },
+  };
   let component: ShallowWrapper;
   let oat: BookEdit;
   beforeEach(() => {
@@ -50,21 +53,15 @@ describe('BookEdit mounted', () => {
   describe('bookTitle input', () => {
     it('changes title in state according to its content change', () => {
       oat.setState(mockBook);
-      const event = {
-        target: { value: 'mockTitle' },
-      };
       component.find('#title').simulate('change', event);
-      expect(oat.state).toEqual({ ...mockBook, title: 'mockTitle' });
+      expect(oat.state).toEqual({ ...mockBook, title: 'mockEvent' });
     });
   });
   describe('bookAuthor input', () => {
     it('changes author in state according to its content change', () => {
       oat.setState(mockBook);
-      const event = {
-        target: { value: 'mockAuthor' },
-      };
       component.find('#author').simulate('change', event);
-      expect(oat.state).toEqual({ ...mockBook, author: 'mockAuthor' });
+      expect(oat.state).toEqual({ ...mockBook, author: 'mockEvent' });
     });
   });
   describe('add button', () => {
