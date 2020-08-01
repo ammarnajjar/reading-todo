@@ -12,6 +12,8 @@ Releases are automatically deployed on [heroku](https://reading-todo.herokuapp.c
 
 I am starting this maily for educational purposes.
 
+For changes refer to [CHANGELOG.md](CHANGELOG.md)
+
 <details>
   <summary>Development</summary>
 
