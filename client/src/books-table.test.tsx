@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { BooksTable } from './books-table';
@@ -21,24 +21,36 @@ describe('BooksTable Element', () => {
     container == null;
   });
 
-  it('renders without a modal', () => {
+  it('renders without a crash', () => {
     render(<BooksTable books={[]} />, container);
-    expect(container?.querySelector('.modal')).toBeNull();
+    // react modal in rendered outside the container
+    // https://stackoverflow.com/a/35228926/3297680
+    const modals = document.body.getElementsByClassName('modal-content');
+    expect(modals.length).toBe(0);
   });
 
   it('opens and closes the modal with buttons', () => {
     render(<BooksTable books={[]} />, container);
-    (container?.querySelector('#modalBtn') as HTMLElement).click();
-    expect(container?.querySelector('.modal')).toBeDefined();
-    (container?.querySelector('#closeBtn') as HTMLElement).click();
-    expect(container?.querySelector('.modal')).toBeNull();
+    (container?.querySelector('button.p-3') as HTMLElement).click();
+    const modal = document.body.getElementsByClassName('modal-content')[0];
+    expect(modal).not.toBeNull();
+    const modalBtn = document.body
+      .getElementsByClassName('modal-footer')[0]
+      .getElementsByClassName('btn')[0];
+    (modalBtn as HTMLElement).click();
+    const modals = document.body.getElementsByClassName('modal-content');
+    expect(modals.length).toBe(0);
   });
 
   it('removes a book when delete is clicked', () => {
     render(<BooksTable books={[]} />, container);
-    (container?.querySelector('#modalBtn') as HTMLElement).click();
-    (container?.querySelector('#add') as HTMLElement).click();
-    (container?.querySelector('#closeBtn') as HTMLElement).click();
+    (container?.querySelector('button.p-3') as HTMLElement).click();
+    (document.body
+      .getElementsByClassName('modal-body')[0]
+      .getElementsByClassName('btn')[0] as HTMLElement).click();
+    (document.body
+      .getElementsByClassName('modal-footer')[0]
+      .getElementsByClassName('btn')[0] as HTMLElement).click();
     expect(container?.querySelector('.bookRow')).toBeDefined();
     (container?.querySelector('#delete_0') as HTMLElement).click();
     expect(container?.querySelector('.bookRow')).toBeNull();
@@ -51,7 +63,7 @@ describe('BooksTable Class', () => {
     { id: 1, title: 'title 1', author: 'author 1', handleDelete: () => {} },
   ];
   const mockBook = { title: 'mockTitle', author: 'mockAuthor' };
-  let component: any;
+  let component: ShallowWrapper;
   let oat: BooksTable;
 
   beforeEach(() => {

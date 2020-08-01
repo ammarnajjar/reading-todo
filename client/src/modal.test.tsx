@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import { Modal } from './modal';
+import { AddModal } from './modal';
 
 describe('Modal', () => {
   let container: Element | null = null;
@@ -21,9 +21,9 @@ describe('Modal', () => {
 
   it('renders without crashing', () => {
     render(
-      <Modal handleClose={() => {}}>
+      <AddModal show={true} handleClose={() => {}}>
         <p>Child</p>
-      </Modal>,
+      </AddModal>,
       container,
     );
   });

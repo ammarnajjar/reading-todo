@@ -31,7 +31,6 @@ describe('BookEdit Element', () => {
 });
 describe('BookEdit mounted', () => {
   const mockBook = { title: 'title', author: 'author' };
-  const originalState = { title: '', author: '' };
   const dumyLambda = () => {};
   let component: ShallowWrapper;
   let oat: BookEdit;
@@ -45,7 +44,7 @@ describe('BookEdit mounted', () => {
     it('calls onBookAdded with the book from state', () => {
       oat.setState(mockBook);
       oat.addBook();
-      expect(oat.state).toEqual(originalState);
+      expect(oat.state).toEqual(mockBook);
     });
   });
   describe('bookTitle input', () => {
@@ -54,7 +53,7 @@ describe('BookEdit mounted', () => {
       const event = {
         target: { value: 'mockTitle' },
       };
-      component.find('#bookTitle').simulate('change', event);
+      component.find('#title').simulate('change', event);
       expect(oat.state).toEqual({ ...mockBook, title: 'mockTitle' });
     });
   });
@@ -64,15 +63,15 @@ describe('BookEdit mounted', () => {
       const event = {
         target: { value: 'mockAuthor' },
       };
-      component.find('#bookAuthor').simulate('change', event);
+      component.find('#author').simulate('change', event);
       expect(oat.state).toEqual({ ...mockBook, author: 'mockAuthor' });
     });
   });
   describe('add button', () => {
-    it('resets the state', () => {
+    it('does not reset the state', () => {
       oat.setState(mockBook);
-      component.find('button').simulate('click');
-      expect(oat.state).toEqual(originalState);
+      component.find('#add').simulate('click');
+      expect(oat.state).toEqual(mockBook);
     });
   });
 });

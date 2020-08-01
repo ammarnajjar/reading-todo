@@ -4,7 +4,7 @@ import { BookElement } from './book-element';
 
 describe('BookElement', () => {
   it('renders without crashing', () => {
-    const container = document.createElement('tbody');
+    const container = document.createElement('div');
     render(
       <BookElement author="" title="" id={99} handleDelete={() => {}} />,
       container,

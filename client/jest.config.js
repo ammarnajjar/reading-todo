@@ -10,6 +10,6 @@ module.exports = {
   snapshotSerializers: ['enzyme-to-json/serializer'],
   setupFilesAfterEnv: ['<rootDir>/src/setupEnzyme.ts'],
   moduleNameMapper: {
-    '^.+\\.(css|less)$': '<rootDir>/config/CSSStub.js',
+    '^.+\\.(css|scss|less)$': '<rootDir>/config/CSSStub.js',
   },
 };
