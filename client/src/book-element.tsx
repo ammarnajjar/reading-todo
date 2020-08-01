@@ -5,15 +5,18 @@ import Row from 'react-bootstrap/Row';
 import { BookInDB } from './models';
 
 export class BookElement extends React.Component<BookInDB> {
+  addCol(text: string) {
+    return (
+      <Col className="m-1">
+        <span className="align-middle">{text}</span>
+      </Col>
+    );
+  }
   render(): ReactElement {
     return (
       <Row>
-        <Col className="m-1">
-          <span className="align-middle">{this.props.title}</span>
-        </Col>
-        <Col className="m-1">
-          <span className="align-middle">{this.props.author}</span>
-        </Col>
+        {this.addCol(this.props.title)}
+        {this.addCol(this.props.author)}
         <Col className="m-1 text-right">
           <Button
             id={`delete_${this.props.id}`}

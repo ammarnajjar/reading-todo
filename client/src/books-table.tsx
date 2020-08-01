@@ -81,6 +81,16 @@ export class BooksTable extends React.Component<
     );
   }
 
+  addCol(text: string) {
+    return (
+      <Col className="m-1">
+        <span className="align-middle">
+          <strong>{text}</strong>
+        </span>
+      </Col>
+    );
+  }
+
   renderBooksTable(): ReactElement {
     return (
       <Container fluid className="p-3">
@@ -94,17 +104,9 @@ export class BooksTable extends React.Component<
         </Jumbotron>
         <Container fluid>
           <Row>
-            <Col className="m-1">
-              <span className="align-middle">
-                <strong>Title</strong>
-              </span>
-            </Col>
-            <Col className="m-1">
-              <span className="align-middle">
-                <strong>Author</strong>
-              </span>
-            </Col>
-            <Col className="m-1"></Col>
+            {this.addCol('Title')}
+            {this.addCol('Author')}
+            {this.addCol('')}
           </Row>
           {this.state.books.map(book => this.renderBook(book))}
         </Container>
