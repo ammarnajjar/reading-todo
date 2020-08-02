@@ -18,27 +18,40 @@ export class BookEdit extends React.Component<PropsModel, Book> {
   constructor(props: PropsModel) {
     super(props);
     this.state = {
+      isbn: '',
       title: '',
       author: '',
+      category: '',
+      year: '',
     };
   }
 
   addBook(): void {
     const book: Book = {
+      isbn: this.state.isbn,
       title: this.state.title,
       author: this.state.author,
+      category: this.state.category,
+      year: this.state.year,
     };
-    console.log('addBook -> book', book);
     this.props.onBookAdded(book);
   }
 
-  addCol(id: string, placeHolder: string, onChange: (e: any) => void) {
+  addCol(
+    size: number | 'auto',
+    id: string,
+    placeHolder: string,
+    type: string,
+    pattern: string,
+    onChange: (e: any) => void,
+  ) {
     return (
-      <Col>
+      <Col sm={size}>
         <Form.Control
-          type="text"
+          type={type}
           placeholder={placeHolder}
           id={id}
+          pattern={pattern}
           onChange={onChange}
         />
       </Col>
@@ -46,19 +59,54 @@ export class BookEdit extends React.Component<PropsModel, Book> {
   }
 
   render(): ReactElement {
+    const gridWidth = 12;
     return (
       <Form>
-        <Form.Row>
-          {this.addCol('title', 'Title', e =>
+        <Form.Group>
+          <Form.Row className="m-2">
+            {this.addCol(
+              gridWidth * 0.75,
+              'isbn',
+              'ISBN',
+              'text',
+              '^[0-9|-]*$',
+              e => this.setState({ isbn: e.target.value }),
+            )}
+            {this.addCol(
+              gridWidth * 0.25,
+              'year',
+              'Year',
+              'text',
+              '^[0-9]{4}$',
+              e => this.setState({ year: e.target.value }),
+            )}
+          </Form.Row>
+        </Form.Group>
+        <Form.Group>
+          {this.addCol(gridWidth, 'title', 'Title', 'text', '.*', e =>
             this.setState({ title: e.target.value }),
           )}
-          {this.addCol('author', 'Author', e =>
+        </Form.Group>
+        <Form.Group>
+          {this.addCol(gridWidth, 'author', 'Author', 'text', '.*', e =>
             this.setState({ author: e.target.value }),
           )}
-          <Button variant="primary" id="add" onClick={() => this.addBook()}>
+        </Form.Group>
+        <Form.Group>
+          {this.addCol(gridWidth, 'category', 'Category', 'text', '.*', e =>
+            this.setState({ category: e.target.value }),
+          )}
+        </Form.Group>
+        <Form.Group className="m-3">
+          <Button
+            block
+            variant="primary"
+            id="add"
+            onClick={() => this.addBook()}
+          >
             Add
           </Button>
-        </Form.Row>
+        </Form.Group>
       </Form>
     );
   }
