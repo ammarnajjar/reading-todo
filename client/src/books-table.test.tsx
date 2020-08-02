@@ -2,7 +2,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
-import { BooksTable, isISBNValid, isYearValid } from './books-table';
+import { BooksTable } from './books-table';
 import { mockBook, mockBooksInDb } from './test/data/book.mock';
 
 describe('BooksTable Element', () => {
@@ -107,53 +107,5 @@ describe('BooksTable Class', () => {
       expect(actualTitles).toContain(mockBook.title);
       expect(actualAuthors).toContain(mockBook.author);
     });
-
-    it('alerts if year is not valid', () => {
-      jest.spyOn(window, 'alert').mockImplementation(() => {});
-      oat.setState({ books: mockBooksInDb });
-      oat.onBookAdded({ ...mockBook, year: '0' });
-      expect(window.alert).toHaveBeenCalledWith('Year enterd is not valid!');
-    });
-
-    it('alerts if isbn is not valid', () => {
-      jest.spyOn(window, 'alert').mockImplementation(() => {});
-      oat.setState({ books: mockBooksInDb });
-      oat.onBookAdded({ ...mockBook, isbn: 'a' });
-      expect(window.alert).toHaveBeenCalledWith('ISBN enterd is not valid!');
-    });
-  });
-});
-
-describe('isYearValid', () => {
-  it('returns false for string not equal to 4 in length', () => {
-    expect(isYearValid('12345')).toBe(false);
-    expect(isYearValid('123')).toBe(false);
-  });
-  it('returns false for year less than 1000', () => {
-    expect(isYearValid('0900')).toBe(false);
-  });
-  it('returns false for year in the future', () => {
-    expect(isYearValid('9999')).toBe(false);
-  });
-  it('returns false for empty string', () => {
-    expect(isYearValid('')).toBe(false);
-  });
-  it('returns true for year between 1000 and today', () => {
-    expect(isYearValid('1001')).toBe(true);
-  });
-});
-
-describe('isISBNValid', () => {
-  it('returns false for non numbers after removing the dashes', () => {
-    expect(isISBNValid('12a-34')).toBe(false);
-  });
-  it('returns true for numbers and dashes', () => {
-    expect(isISBNValid('12-34')).toBe(true);
-  });
-  it('returns true for numbers', () => {
-    expect(isISBNValid('1234')).toBe(true);
-  });
-  it('returns true for empty ISBN', () => {
-    expect(isISBNValid('')).toBe(true);
   });
 });

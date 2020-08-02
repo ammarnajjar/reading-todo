@@ -11,27 +11,6 @@ import { BookElement } from './book-element';
 import { AddModal } from './modal';
 import { Book, BookInDB, BooksTableProps } from './models';
 
-export function isYearValid(year: string): boolean {
-  const yearAsNumber = Number(year);
-  if (isNaN(yearAsNumber) || year.length !== 4) {
-    return false;
-  }
-  if (yearAsNumber < 1000 || yearAsNumber > new Date().getFullYear()) {
-    return false;
-  }
-  return true;
-}
-
-export function isISBNValid(isbn: string): boolean {
-  if (isbn === '') {
-    return true;
-  }
-  if (isNaN(Number(isbn.replace('-', '')))) {
-    return false;
-  }
-  return true;
-}
-
 export class BooksTable extends React.Component<
   BooksTableProps,
   { showModal: boolean; books: BookInDB[]; currentId: number }
@@ -63,14 +42,6 @@ export class BooksTable extends React.Component<
   }
 
   onBookAdded = (book: Book) => {
-    if (!isYearValid(book.year)) {
-      alert('Year enterd is not valid!');
-      return;
-    }
-    if (!isISBNValid(book.isbn)) {
-      alert('ISBN enterd is not valid!');
-      return;
-    }
     const books = [
       {
         id: this.state.currentId,
