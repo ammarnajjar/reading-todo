@@ -1,23 +1,24 @@
 import React, { ReactElement } from 'react';
 import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import { BookInDB } from './models';
 
 export class BookElement extends React.Component<BookInDB> {
   addCol(text: string) {
     return (
-      <Col className="m-1">
+      <td>
         <span className="align-middle">{text}</span>
-      </Col>
+      </td>
     );
   }
   render(): ReactElement {
     return (
-      <Row>
+      <tr>
+        {this.addCol(this.props.isbn)}
         {this.addCol(this.props.title)}
         {this.addCol(this.props.author)}
-        <Col className="m-1 text-right">
+        {this.addCol(this.props.year.toString())}
+        {this.addCol(this.props.category)}
+        <td className="text-right">
           <Button
             id={`delete_${this.props.id}`}
             onClick={this.props.handleDelete}
@@ -26,8 +27,8 @@ export class BookElement extends React.Component<BookInDB> {
           >
             Delete
           </Button>
-        </Col>
-      </Row>
+        </td>
+      </tr>
     );
   }
 }

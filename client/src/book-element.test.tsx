@@ -4,9 +4,17 @@ import { BookElement } from './book-element';
 
 describe('BookElement', () => {
   it('renders without crashing', () => {
-    const container = document.createElement('div');
+    const container = document.createElement('tbody');
     render(
-      <BookElement author="" title="" id={99} handleDelete={() => {}} />,
+      <BookElement
+        isbn="1234"
+        year={1234}
+        category=""
+        author=""
+        title=""
+        id={99}
+        handleDelete={() => {}}
+      />,
       container,
     );
     unmountComponentAtNode(container);

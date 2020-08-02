@@ -2,6 +2,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { BookEdit } from './book-edit';
+import { mockBook } from './test/data/book.mock';
 
 describe('BookEdit Element', () => {
   let container: Element | null = null;
@@ -29,8 +30,8 @@ describe('BookEdit Element', () => {
     });
   });
 });
+
 describe('BookEdit mounted', () => {
-  const mockBook = { title: 'title', author: 'author' };
   const dumyLambda = () => {};
   const event = {
     target: { value: 'mockEvent' },
@@ -50,7 +51,21 @@ describe('BookEdit mounted', () => {
       expect(oat.state).toEqual(mockBook);
     });
   });
-  describe('bookTitle input', () => {
+  describe('isbn input', () => {
+    it('changes isbntitle in state according to its content change', () => {
+      oat.setState(mockBook);
+      component.find('#isbn').simulate('change', event);
+      expect(oat.state).toEqual({ ...mockBook, isbn: 'mockEvent' });
+    });
+  });
+  describe('year input', () => {
+    it('changes year in state according to its content change', () => {
+      oat.setState(mockBook);
+      component.find('#year').simulate('change', event);
+      expect(oat.state).toEqual({ ...mockBook, year: 'mockEvent' });
+    });
+  });
+  describe('title input', () => {
     it('changes title in state according to its content change', () => {
       oat.setState(mockBook);
       component.find('#title').simulate('change', event);
@@ -62,6 +77,13 @@ describe('BookEdit mounted', () => {
       oat.setState(mockBook);
       component.find('#author').simulate('change', event);
       expect(oat.state).toEqual({ ...mockBook, author: 'mockEvent' });
+    });
+  });
+  describe('category input', () => {
+    it('changes category in state according to its content change', () => {
+      oat.setState(mockBook);
+      component.find('#category').simulate('change', event);
+      expect(oat.state).toEqual({ ...mockBook, category: 'mockEvent' });
     });
   });
   describe('add button', () => {

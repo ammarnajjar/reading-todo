@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { ReactElement } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 export class AddModal extends React.Component<{
@@ -20,11 +19,6 @@ export class AddModal extends React.Component<{
           <Modal.Title>New Book:</Modal.Title>
         </Modal.Header>
         <Modal.Body>{this.props.children}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={this.props.handleClose}>
-            Done
-          </Button>
-        </Modal.Footer>
       </Modal>
     );
   }
