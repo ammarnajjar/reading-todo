@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
+import Table from 'react-bootstrap/Table';
 import { BookEdit } from './book-edit';
 import { BookElement } from './book-element';
 import { AddModal } from './modal';
@@ -36,7 +37,6 @@ export class BooksTable extends React.Component<
   }
 
   onBookDeleted(bookId: number): void {
-    console.log('onBookDeleted -> bookId', bookId);
     const books = this.state.books.filter(book => book.id !== bookId);
     this.setState({ books });
   }
@@ -45,8 +45,11 @@ export class BooksTable extends React.Component<
     const books = [
       {
         id: this.state.currentId,
+        isbn: book.isbn,
         title: book.title,
         author: book.author,
+        category: book.category,
+        year: Number(book.year),
         handleDelete: () => {},
       },
       ...this.state.books,
@@ -62,8 +65,11 @@ export class BooksTable extends React.Component<
       <BookElement
         key={book.id}
         id={book.id}
-        author={book.author}
+        isbn={book.isbn}
         title={book.title}
+        author={book.author}
+        category={book.category}
+        year={book.year}
         handleDelete={() => this.onBookDeleted(book.id)}
       />
     );
@@ -81,16 +87,6 @@ export class BooksTable extends React.Component<
     );
   }
 
-  addCol(text: string) {
-    return (
-      <Col className="m-1">
-        <span className="align-middle">
-          <strong>{text}</strong>
-        </span>
-      </Col>
-    );
-  }
-
   renderBooksTable(): ReactElement {
     return (
       <Container fluid className="p-3">
@@ -103,12 +99,19 @@ export class BooksTable extends React.Component<
           </Row>
         </Jumbotron>
         <Container fluid>
-          <Row>
-            {this.addCol('Title')}
-            {this.addCol('Author')}
-            {this.addCol('')}
-          </Row>
-          {this.state.books.map(book => this.renderBook(book))}
+          <Table responsive borderless hover striped size="sm">
+            <thead>
+              <tr>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Category</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>{this.state.books.map(book => this.renderBook(book))}</tbody>
+          </Table>
         </Container>
       </Container>
     );

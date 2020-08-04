@@ -1,8 +1,9 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
 import { BooksTable } from './books-table';
-import { BookInDB } from './models';
+import { mockBook, mockBooksInDb } from './test/data/book.mock';
 
 describe('BooksTable Element', () => {
   let container: Element | null = null;
@@ -34,10 +35,7 @@ describe('BooksTable Element', () => {
     (container?.querySelector('button.p-3') as HTMLElement).click();
     const modal = document.body.getElementsByClassName('modal-content')[0];
     expect(modal).not.toBeNull();
-    const modalBtn = document.body
-      .getElementsByClassName('modal-footer')[0]
-      .getElementsByClassName('btn')[0];
-    (modalBtn as HTMLElement).click();
+    (document.body.getElementsByClassName('modal')[0] as HTMLElement).click();
     const modals = document.body.getElementsByClassName('modal-content');
     expect(modals.length).toBe(0);
   });
@@ -45,24 +43,29 @@ describe('BooksTable Element', () => {
   it('removes a book when delete is clicked', () => {
     render(<BooksTable books={[]} />, container);
     (container?.querySelector('button.p-3') as HTMLElement).click();
+
+    const isbnInput = document.body.getElementsByTagName(
+      'input',
+    )[0] as HTMLInputElement;
+    const yearInput = document.body.getElementsByTagName(
+      'input',
+    )[1] as HTMLInputElement;
+    isbnInput.value = '1234';
+    yearInput.value = '1234';
+    ReactTestUtils.Simulate.change(isbnInput);
+    ReactTestUtils.Simulate.change(yearInput);
+
     (document.body
       .getElementsByClassName('modal-body')[0]
-      .getElementsByClassName('btn')[0] as HTMLElement).click();
-    (document.body
-      .getElementsByClassName('modal-footer')[0]
-      .getElementsByClassName('btn')[0] as HTMLElement).click();
-    expect(container?.querySelector('.bookRow')).toBeDefined();
+      .getElementsByClassName('btn')[0] as HTMLButtonElement).click();
+    (document.body.getElementsByClassName('close')[0] as HTMLElement).click();
+    expect(container?.querySelector('tbody tr')).not.toBeNull();
     (container?.querySelector('#delete_0') as HTMLElement).click();
     expect(container?.querySelector('.bookRow')).toBeNull();
   });
 });
 
 describe('BooksTable Class', () => {
-  const mockBooksInDb: BookInDB[] = [
-    { id: 0, title: 'title 0', author: 'author 0', handleDelete: () => {} },
-    { id: 1, title: 'title 1', author: 'author 1', handleDelete: () => {} },
-  ];
-  const mockBook = { title: 'mockTitle', author: 'mockAuthor' };
   let component: ShallowWrapper;
   let oat: BooksTable;
 
