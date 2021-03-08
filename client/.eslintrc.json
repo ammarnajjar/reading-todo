@@ -35,7 +35,11 @@
   "rules": {
     "prettier/prettier": [
       "error",
-      { "singleQuote": true, "trailingComma": "all" }
+      {
+        "singleQuote": true,
+        "endOfLine": "auto",
+        "trailingComma": "all"
+      }
     ],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-empty-function": [
