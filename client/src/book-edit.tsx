@@ -74,7 +74,7 @@ export class BookEdit extends React.Component<PropsModel, Book> {
     pattern: string,
     onChange: (e: any) => void,
     validation: ReactElement | null,
-  ) {
+  ): ReactElement {
     return (
       <Col sm={size}>
         <Form.Control

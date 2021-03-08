@@ -8,7 +8,7 @@ export const mockBooksInDb: BookInDB[] = [
     category: '',
     title: 'title 0',
     author: 'author 0',
-    handleDelete: () => {},
+    handleDelete: (): void => {},
   },
   {
     id: 1,
@@ -17,7 +17,7 @@ export const mockBooksInDb: BookInDB[] = [
     category: '',
     title: 'title 1',
     author: 'author 1',
-    handleDelete: () => {},
+    handleDelete: (): void => {},
   },
 ];
 

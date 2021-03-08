@@ -4,6 +4,8 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { BookEdit, isISBNValid, isYearValid } from './book-edit';
 import { mockBook } from './test/data/book.mock';
 
+const dumyLambda = () => {};
+
 describe('BookEdit Element', () => {
   let container: Element | null = null;
 
@@ -24,7 +26,7 @@ describe('BookEdit Element', () => {
   describe('render', () => {
     it('renders without crashing', () => {
       render(
-        <BookEdit onBookAdded={() => {}} onBookDeleted={() => {}} />,
+        <BookEdit onBookAdded={dumyLambda} onBookDeleted={dumyLambda} />,
         container,
       );
     });
@@ -32,7 +34,6 @@ describe('BookEdit Element', () => {
 });
 
 describe('BookEdit mounted', () => {
-  const dumyLambda = () => {};
   const event = {
     target: { value: 'mockEvent' },
   };
@@ -52,14 +53,14 @@ describe('BookEdit mounted', () => {
     });
 
     it('alerts if year is not valid', () => {
-      jest.spyOn(window, 'alert').mockImplementation(() => {});
+      jest.spyOn(window, 'alert').mockImplementation(dumyLambda);
       oat.setState({ ...mockBook, year: '0' });
       oat.addBook();
       expect(window.alert).toHaveBeenCalledWith('Year enterd is not valid!');
     });
 
     it('alerts if isbn is not valid', () => {
-      jest.spyOn(window, 'alert').mockImplementation(() => {});
+      jest.spyOn(window, 'alert').mockImplementation(dumyLambda);
       oat.setState({ ...mockBook, isbn: 'a' });
       oat.addBook();
       expect(window.alert).toHaveBeenCalledWith('ISBN enterd is not valid!');

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { BookInDB } from './models';
 
 export class BookElement extends React.Component<BookInDB> {
-  addCol(text: string) {
+  addCol(text: string): ReactElement {
     return (
       <td>
         <span className="align-middle">{text}</span>

@@ -17,7 +17,7 @@
     "plugin:react/recommended",
     "plugin:jest/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
+    "prettier",
     "plugin:prettier/recommended"
   ],
   "globals": {
@@ -36,6 +36,10 @@
     "prettier/prettier": [
       "error",
       { "singleQuote": true, "trailingComma": "all" }
+    ],
+    "@typescript-eslint/no-empty-function": [
+      "error",
+      { "allow": ["arrowFunctions"] }
     ]
   },
   "parser": "@typescript-eslint/parser"

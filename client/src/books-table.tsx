@@ -41,7 +41,7 @@ export class BooksTable extends React.Component<
     this.setState({ books });
   }
 
-  onBookAdded = (book: Book) => {
+  onBookAdded = (book: Book): void => {
     const books = [
       {
         id: this.state.currentId,
