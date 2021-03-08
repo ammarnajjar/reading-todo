@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  build:
+  client:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,19 +17,47 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install dependencies
+      - name: Prepare
         run: |
           cd client
           yarn install --frozen-lockfile
-      - name: Lint React
+      - name: Lint
         run: |
           cd client
           yarn lint
-      - name: Run tests
+      - name: Tests
         run: |
           cd client
-          yarn test --coverage --watchAll false
-      - name: Build Client
+          yarn test:ci
+      - name: Build
         run: |
           cd client
+          yarn build
+
+  api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Set Node.js 14
+        uses: actions/setup-node@main
+        with:
+          node-version: 14
+
+      - name: Prepare
+        run: |
+          cd api
+          yarn install --frozen-lockfile
+      - name: Lint
+        run: |
+          cd api
+          yarn lint:ci
+      - name: Tests
+        run: |
+          cd api
+          yarn test:ci
+      - name: Build
+        run: |
+          cd api
           yarn build
