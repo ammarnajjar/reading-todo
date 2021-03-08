@@ -17,7 +17,7 @@ For the project a back end technology need to be chosen and adopted coupled with
 ### Pros:
 
 - Under the hood, Nest makes use of Express, but also, provides compatibility with a wide range of other libraries.
-- Very popular 134544 github stars, used by 2343208 users, 1305 contributers.
+- Very popular 35153 github stars.
 - Under Active development and maintenance.
 - Heavily inspired by Angular.
 
