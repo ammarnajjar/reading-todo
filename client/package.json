@@ -31,7 +31,7 @@
   "scripts": {
     "lint": "eslint src/**/*.{ts,tsx}",
     "start": "node server.js",
-    "serve": "react-scripts start",
+    "start:dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --watch --coverage",
     "test:ci": "jest --coverage",
