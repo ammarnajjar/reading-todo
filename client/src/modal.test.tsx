@@ -19,6 +19,7 @@ describe('Modal', () => {
     container = null;
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it('renders without crashing', () => {
     render(
       <AddModal show={true} handleClose={() => {}}>

@@ -55,9 +55,11 @@ describe('BooksTable Element', () => {
     ReactTestUtils.Simulate.change(isbnInput);
     ReactTestUtils.Simulate.change(yearInput);
 
-    (document.body
-      .getElementsByClassName('modal-body')[0]
-      .getElementsByClassName('btn')[0] as HTMLButtonElement).click();
+    (
+      document.body
+        .getElementsByClassName('modal-body')[0]
+        .getElementsByClassName('btn')[0] as HTMLButtonElement
+    ).click();
     (document.body.getElementsByClassName('close')[0] as HTMLElement).click();
     expect(container?.querySelector('tbody tr')).not.toBeNull();
     (container?.querySelector('#delete_0') as HTMLElement).click();

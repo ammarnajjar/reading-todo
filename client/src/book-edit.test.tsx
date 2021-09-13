@@ -24,6 +24,7 @@ describe('BookEdit Element', () => {
   });
 
   describe('render', () => {
+    // eslint-disable-next-line jest/expect-expect
     it('renders without crashing', () => {
       render(
         <BookEdit onBookAdded={dumyLambda} onBookDeleted={dumyLambda} />,
