@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
-      - name: Update npm
+      - name: Install dependencies
         run: |
           cd client
           yarn install --frozen-lockfile
