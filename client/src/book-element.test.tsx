@@ -3,6 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { BookElement } from './book-element';
 
 describe('BookElement', () => {
+  // eslint-disable-next-line jest/expect-expect
   it('renders without crashing', () => {
     const container = document.createElement('tbody');
     render(
