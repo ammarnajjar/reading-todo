@@ -3,7 +3,7 @@ name: CI-PR
 on: [pull_request]
 
 jobs:
-  build:
+  client:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -18,19 +18,50 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
-      - name: Install dependencies
+      - name: Dependencies
         run: |
           cd client
           yarn install --frozen-lockfile
-      - name: Lint React
+      - name: Lint
         run: |
           cd client
           yarn lint
-      - name: Run tests
+      - name: Tests
         run: |
           cd client
           yarn test --coverage --watchAll false
-      - name: Build Client
+      - name: Build
         run: |
           cd client
+          yarn build
+  api:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: [14, 16]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Set Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@main
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Dependencies
+        run: |
+          cd api
+          yarn install --frozen-lockfile
+      - name: Lint
+        run: |
+          cd api
+          yarn lint
+      - name: Tests
+        run: |
+          cd api
+          yarn test --coverage --watchAll false
+      - name: Build
+        run: |
+          cd api
           yarn build
