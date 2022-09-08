@@ -12,10 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@main
 
-      - name: Set Node.js 14
+      - name: Set Node.js 18
         uses: actions/setup-node@main
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Install dependencies
         run: |
